@@ -1,0 +1,10 @@
+*.iml
+*.xml
+target/
+.idea/
+out/
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
