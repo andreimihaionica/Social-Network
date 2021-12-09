@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import java.util.List;
+import java.util.Objects;
 
 public class HelloController {
     private Service service;
@@ -29,10 +30,16 @@ public class HelloController {
     TextField usernameField;
 
     @FXML
+    TextField searchUser;
+
+    @FXML
     PasswordField passwordField;
 
     @FXML
     TableView tableFriendRequests;
+
+    @FXML
+    TableView tableUsers;
 
     public static class FriendRequest {
         public final String username;
@@ -49,14 +56,35 @@ public class HelloController {
         public final String getUsername() {
             return username;
         }
+
         public final String getDate() {
             return date;
         }
+
         public final Button getAccept() {
             return accept;
         }
+
         public final Button getReject() {
             return reject;
+        }
+    }
+
+    public static class SearchUser {
+        public final String username;
+        public final Button button;
+
+        public SearchUser(String username) {
+            this.username = username;
+            this.button = new Button(" ");
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public Button getButton() {
+            return button;
         }
     }
 
@@ -83,13 +111,27 @@ public class HelloController {
     }
 
     @FXML
+    protected void initializeTableUsers() {
+        TableColumn usernameCol = new TableColumn("Username");
+        TableColumn buttonCol = new TableColumn(" ");
+
+        usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        usernameCol.setStyle("-fx-alignment: CENTER;");
+
+        buttonCol.setCellValueFactory(new PropertyValueFactory<>("button"));
+        buttonCol.setStyle("-fx-alignment: CENTER;");
+
+        tableUsers.getColumns().addAll(usernameCol, buttonCol);
+    }
+
+    @FXML
     protected void showFriendRequests() {
         ObservableList<FriendRequest> data = FXCollections.observableArrayList();
 
         String username, date;
         List<String> split;
 
-        for(String friendRequest:service.getAllPendingFriendships(currentUser)){
+        for (String friendRequest : service.getAllPendingFriendships(currentUser)) {
             split = List.of(friendRequest.split(" "));
             username = split.get(0);
             date = split.get(2);
@@ -111,8 +153,37 @@ public class HelloController {
     }
 
     @FXML
+    protected void showUsers() {
+        String searchString = searchUser.getText();
+        if(searchString==null)
+            System.out.println("ceva");
+        ObservableList<SearchUser> data = FXCollections.observableArrayList();
+        for (var user : service.getAllUsers()) {
+            if (user.getUsername().startsWith(searchString)) {
+                SearchUser searchUser = new SearchUser(user.getUsername());
+                if (service.verifyFriendship(user.getUsername(), currentUser)) {
+                    searchUser.getButton().setText("Remove");
+                    searchUser.getButton().setOnAction(e -> {
+                        service.deleteFriendship(user.getUsername(), currentUser);
+                        searchUser.getButton().setDisable(true);
+                    });
+                    data.add(searchUser);
+                } else if(!Objects.equals(user.getUsername(), currentUser)){
+                    searchUser.getButton().setText("Add");
+                    searchUser.getButton().setOnAction(e -> {
+                        service.addFriendship(currentUser, user.getUsername());
+                        searchUser.getButton().setDisable(true);
+                    });
+                    data.add(searchUser);
+                }
+            }
+        }
+        tableUsers.setItems(data);
+    }
+
+    @FXML
     protected void logIn() {
-        if(service.getUser(usernameField.getText()) != null){
+        if (service.getUser(usernameField.getText()) != null) {
             currentUser = usernameField.getText();
 
             vBox.getChildren().removeAll(vBox.getChildren());
@@ -129,8 +200,10 @@ public class HelloController {
             vBoxRight.setAlignment(Pos.CENTER);
             vBoxRight.setSpacing(10);
 
-            TextField searchUser = new TextField();
-            TableView tableUsers = new TableView();
+            searchUser = new TextField("");
+            tableUsers = new TableView<SearchUser>();
+            initializeTableUsers();
+            searchUser.textProperty().addListener(e->showUsers());
             vBoxLeft.getChildren().addAll(searchUser, tableUsers);
 
             Button showFriendRequestsButton = new Button("Show friend requests");
@@ -143,8 +216,7 @@ public class HelloController {
 
             hBox.getChildren().addAll(vBoxLeft, vBoxRight);
             vBox.getChildren().add(hBox);
-        }
-        else{
+        } else {
             Label mesaj = new Label("Incorrect username!");
             mesaj.setFont(new Font("System", 15));
             vBox.getChildren().add(mesaj);

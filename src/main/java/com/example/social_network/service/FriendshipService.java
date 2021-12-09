@@ -45,6 +45,9 @@ public class FriendshipService {
         repo.update(id, newFriendship);
     }
 
+    public Friendship findOne(Tuple<Long, Long> id) {
+        return repo.findOne(id);
+    }
     /**
      * Get all friendships
      * @return List of friendships
