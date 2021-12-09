@@ -30,18 +30,18 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 400, 600);
 
         Validator<User> userValidator = new UserValidator();
-        Repository<Long, User> userRepository = new UserDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", userValidator);
-        // Repository<Long, User> userRepository = new UserDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", userValidator);
+        //Repository<Long, User> userRepository = new UserDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", userValidator);
+         Repository<Long, User> userRepository = new UserDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", userValidator);
         UserService userService = new UserService(userRepository);
 
         Validator<Friendship> friendshipValidator = new FriendshipValidator();
-        Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", friendshipValidator);
-        // Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", friendshipValidator);
+        //Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", friendshipValidator);
+         Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", friendshipValidator);
         FriendshipService friendshipService = new FriendshipService(friendshipRepository);
 
         Validator<Message> messageValidator = new MessageValidator();
-        Repository<Long, Message> messageRepository = new MessageDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", messageValidator);
-        // Repository<Long, Message> messageRepository = new MessageDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", messageValidator);
+        //Repository<Long, Message> messageRepository = new MessageDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", messageValidator);
+         Repository<Long, Message> messageRepository = new MessageDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", messageValidator);
         MessageService messageService = new MessageService(messageRepository);
 
         HelloController ctrl = fxmlLoader.getController();
