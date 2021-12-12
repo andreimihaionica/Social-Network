@@ -1,5 +1,6 @@
 package com.example.social_network;
 
+import com.example.social_network.domain.FriendshipStatus;
 import com.example.social_network.service.Service;
 //import com.example.social_network.util.FriendRequest;
 import javafx.collections.FXCollections;
@@ -161,7 +162,7 @@ public class HelloController {
         for (var user : service.getAllUsers()) {
             if (user.getUsername().startsWith(searchString)) {
                 SearchUser searchUser = new SearchUser(user.getUsername());
-                if (service.verifyFriendship(user.getUsername(), currentUser)) {
+                if (service.verifyFriendship(user.getUsername(), currentUser) == FriendshipStatus.APPROVED) {
                     searchUser.getButton().setText("Remove");
                     searchUser.getButton().setOnAction(e -> {
                         service.deleteFriendship(user.getUsername(), currentUser);
@@ -169,12 +170,16 @@ public class HelloController {
                     });
                     data.add(searchUser);
                 } else if(!Objects.equals(user.getUsername(), currentUser)){
-                    searchUser.getButton().setText("Add");
-                    searchUser.getButton().setOnAction(e -> {
-                        service.addFriendship(currentUser, user.getUsername());
-                        searchUser.getButton().setDisable(true);
-                    });
-                    data.add(searchUser);
+
+                    if(service.verifyFriendship(user.getUsername(), currentUser) == FriendshipStatus.REJECTED) {
+                        searchUser.getButton().setText("Add");
+                        searchUser.getButton().setOnAction(e -> {
+                            service.addFriendship(currentUser, user.getUsername());
+                            searchUser.getButton().setDisable(true);
+                        });
+                        data.add(searchUser);
+                    }
+
                 }
             }
         }
@@ -203,6 +208,7 @@ public class HelloController {
             searchUser = new TextField("");
             tableUsers = new TableView<SearchUser>();
             initializeTableUsers();
+            showUsers();
             searchUser.textProperty().addListener(e->showUsers());
             vBoxLeft.getChildren().addAll(searchUser, tableUsers);
 

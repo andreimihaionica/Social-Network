@@ -186,13 +186,18 @@ public class Service {
         return friendshipService.getAll();
     }
 
-    public boolean verifyFriendship(String username1, String username2) {
+    public FriendshipStatus verifyFriendship(String username1, String username2) {
         Tuple<Long, Long> id = new Tuple(userService.getUser(username1).getId(), userService.getUser(username2).getId());
         if (friendshipService.findOne(id) != null)
-            return true;
+            return friendshipService.findOne(id).getStatus();
+
         id.setLeft(userService.getUser(username2).getId());
         id.setRight(userService.getUser(username1).getId());
-        return friendshipService.findOne(id) != null;
+
+        if (friendshipService.findOne(id) != null)
+            return friendshipService.findOne(id).getStatus();
+
+        return null;
     }
 
     public List<String> getAllPendingFriendships(String username) {
