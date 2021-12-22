@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -78,9 +79,8 @@ public class Controller {
             tableUsers.setItems(searchUser());
         }
 
-        if (searchString != null) {
-            searchString.textProperty().addListener(e -> handleFilter());
-        }
+        searchString.textProperty().addListener(e -> handleFilter());
+
 
     }
 
@@ -100,7 +100,7 @@ public class Controller {
                 searchUser.getButton().setText("Remove");
                 searchUser.getButton().setOnAction(e -> {
                     service.deleteFriendship(user.getUsername(), currentUser);
-                    searchUser.getButton().setDisable(true);
+                    sceneRefresh();
                 });
                 users.add(searchUser);
 
@@ -109,13 +109,33 @@ public class Controller {
                     searchUser.getButton().setText("Add");
                     searchUser.getButton().setOnAction(e -> {
                         service.addFriendship(currentUser, user.getUsername());
-                        searchUser.getButton().setDisable(true);
+                        sceneRefresh();
+                    });
+                    users.add(searchUser);
+                } else if (service.getFriendship(currentUser, user.getUsername()) != null && service.getFriendship(currentUser, user.getUsername()).getStatus() == FriendshipStatus.PENDING) {
+                    searchUser.getButton().setText("Cancel");
+                    searchUser.getButton().setOnAction(e -> {
+                        service.deleteFriendship(currentUser, user.getUsername());
+                        sceneRefresh();
                     });
                     users.add(searchUser);
                 }
             }
         }
+        Collections.sort(users, Comparator.comparing(SearchUser::getUsername));
         return users;
+    }
+
+    private void sceneRefresh() {
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("socialNetwork.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage = (Stage) myMenuButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void logOut() throws IOException {

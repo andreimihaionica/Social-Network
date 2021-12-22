@@ -210,6 +210,10 @@ public class Service {
         return friendships;
     }
 
+    public Friendship getFriendship(String username1, String username2) {
+        return friendshipService.findOne(new Tuple<>(getUser(username1).getId(), getUser(username2).getId()));
+    }
+
     /**
      * Determinate no. of connected components
      *
