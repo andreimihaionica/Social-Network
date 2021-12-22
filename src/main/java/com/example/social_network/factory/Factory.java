@@ -1,5 +1,6 @@
 package com.example.social_network.factory;
 
+import com.example.social_network.UI.UI;
 import com.example.social_network.domain.Friendship;
 import com.example.social_network.domain.Message;
 import com.example.social_network.domain.Tuple;
@@ -21,25 +22,26 @@ public class Factory {
     private UserService getUserService() {
         Validator<User> userValidator = new UserValidator();
         Repository<Long, User> userRepository = new UserDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", userValidator);
-        //Repository<Long, User> userRepository = new UserDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", userValidator);
         return new UserService(userRepository);
     }
 
     private FriendshipService getFriendshipService() {
         Validator<Friendship> friendshipValidator = new FriendshipValidator();
         Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", friendshipValidator);
-        //Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", friendshipValidator);
         return new FriendshipService(friendshipRepository);
     }
 
     private MessageService getMessageService() {
         Validator<Message> messageValidator = new MessageValidator();
         Repository<Long, Message> messageRepository = new MessageDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", messageValidator);
-        //Repository<Long, Message> messageRepository = new MessageDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "password", messageValidator);
         return new MessageService(messageRepository);
     }
 
     public Service getService() {
         return new Service(getUserService(), getFriendshipService(), getMessageService());
+    }
+
+    public UI getUI() {
+        return new UI(getService(), System.in, System.out);
     }
 }
