@@ -153,4 +153,12 @@ public class Controller {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void messages() throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("receivedMessages.fxml")));
+        stage = (Stage) myMenuButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

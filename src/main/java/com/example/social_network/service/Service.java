@@ -423,4 +423,8 @@ public class Service {
         return conversations;
     }
 
+    public Iterable<Message> getAllMessages(){
+        return messageService.getAll();
+    }
+
 }

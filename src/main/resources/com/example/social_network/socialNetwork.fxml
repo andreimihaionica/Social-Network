@@ -29,7 +29,7 @@
             <MenuButton fx:id="myMenuButton" mnemonicParsing="false">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#friendRequests" text="Friend Requests" />
-                  <MenuItem mnemonicParsing="false" text="Messages" />
+                  <MenuItem mnemonicParsing="false" onAction="#messages" text="Messages" />
                   <MenuItem mnemonicParsing="false" text="Events" />
                   <MenuItem mnemonicParsing="false" onAction="#logOut" text="Log out" />
                </items>
