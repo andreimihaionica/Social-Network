@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.SendNewMessageController">
+    <children>
+        <HBox alignment="BOTTOM_CENTER" prefHeight="178.0" prefWidth="600.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Send new message:" wrappingWidth="513.3890639543533">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="310.0" prefWidth="600.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="224.0" prefWidth="422.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="422.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To" textAlignment="CENTER" wrappingWidth="110.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="to" prefHeight="26.0" prefWidth="192.0" promptText="Example: user1;user2" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="422.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Message" textAlignment="CENTER" wrappingWidth="110.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="message" prefHeight="137.0" prefWidth="290.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+        </HBox>
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#sendMessage" text="Send">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="175.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="warningMessage" textFill="RED">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+    </children>
+</VBox>

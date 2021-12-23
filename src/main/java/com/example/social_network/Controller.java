@@ -80,8 +80,6 @@ public class Controller {
         }
 
         searchString.textProperty().addListener(e -> handleFilter());
-
-
     }
 
     private void handleFilter() {
@@ -159,6 +157,7 @@ public class Controller {
         stage = (Stage) myMenuButton.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+
         stage.show();
     }
 }

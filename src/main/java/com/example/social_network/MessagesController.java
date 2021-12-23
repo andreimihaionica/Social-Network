@@ -3,7 +3,6 @@ package com.example.social_network;
 import com.example.social_network.domain.Message;
 import com.example.social_network.service.Service;
 import com.example.social_network.util.Conversation;
-import com.example.social_network.util.FriendRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -42,7 +38,6 @@ public class MessagesController {
 
     @FXML
     TableColumn conversationColumn;
-
 
     @FXML
     public void initialize() {
@@ -92,13 +87,22 @@ public class MessagesController {
                     messageList.add(message1);
                 }
 
-                Conversation conversation = new Conversation(messageList);
+                Conversation conversation = new Conversation(messageList, currentUser);
                 data.add(conversation);
             }
         }
 
         return data;
     }
+
+    public void sendNewMessage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sendNewMessage.fxml")));
+        Stage stage = new Stage();
+        stage.setTitle("Send new message");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     public void goBack(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("socialNetwork.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -106,5 +110,4 @@ public class MessagesController {
         stage.setScene(scene);
         stage.show();
     }
-
 }

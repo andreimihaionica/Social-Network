@@ -17,7 +17,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-            <Button mnemonicParsing="false" text="New message" />
+            <Button fx:id="sendNewMessage" mnemonicParsing="false" onAction="#sendNewMessage" text="New message" />
                 <Button mnemonicParsing="false" onAction="#goBack" text="Go back" />
             </children>
         </HBox>
