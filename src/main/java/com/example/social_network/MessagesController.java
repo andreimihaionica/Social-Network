@@ -4,6 +4,7 @@ import com.example.social_network.domain.Message;
 import com.example.social_network.service.Service;
 import com.example.social_network.util.Conversation;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ public class MessagesController {
     private Scene scene;
     private Parent root;
 
+    public static ObservableList<Conversation> data;
+    public static int row;
     public static String currentUser;
     private static Service service;
 
@@ -52,8 +55,21 @@ public class MessagesController {
             usersColumn.setStyle("-fx-alignment: CENTER;");
             conversationColumn.setStyle("-fx-alignment: CENTER;");
 
-            tableReceivedMessages.setItems(getConversations());
+            getConversations();
+            tableReceivedMessages.setItems(data);
         }
+
+        tableReceivedMessages.getSelectionModel().setCellSelectionEnabled(true);
+        ObservableList selectedCells = tableReceivedMessages.getSelectionModel().getSelectedCells();
+
+        selectedCells.addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(Change c) {
+                TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+                int val = tablePosition.getRow();
+                seeMessage(val);
+            }
+        });
     }
 
     private Message getReply(Long id){
@@ -64,8 +80,8 @@ public class MessagesController {
         return null;
     }
 
-    private ObservableList<Conversation> getConversations() {
-        ObservableList<Conversation> data = FXCollections.observableArrayList();
+    private void getConversations() {
+        data = FXCollections.observableArrayList();
 
         List<Message> messages = new ArrayList<>();
         for (Message message : service.getAllMessages()) {
@@ -91,8 +107,6 @@ public class MessagesController {
                 data.add(conversation);
             }
         }
-
-        return data;
     }
 
     public void sendNewMessage(ActionEvent event) throws IOException {
@@ -100,6 +114,20 @@ public class MessagesController {
         Stage stage = new Stage();
         stage.setTitle("Send new message");
         stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void seeMessage(int row) {
+        MessagesController.row = row;
+
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("seeMessage.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage = (Stage) tableReceivedMessages.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
 

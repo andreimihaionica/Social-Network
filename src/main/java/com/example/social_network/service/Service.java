@@ -356,7 +356,7 @@ public class Service {
      * @param message - String
      * @param reply - id of reply
      */
-    public void sendMessage(String from, String to, String message, Long reply) {
+    public Message sendMessage(String from, String to, String message, Long reply) {
         User userFrom = null;
         if (userService.getUser(from) == null)
             throw new IllegalArgumentException("User " + from + " does not exist!");
@@ -379,10 +379,12 @@ public class Service {
             throw new IllegalArgumentException("Reply message does not exist!");
 
         if (!userTo.isEmpty())
-            messageService.sendMessage(userFrom, userTo, message, date, reply);
+            return messageService.sendMessage(userFrom, userTo, message, date, reply);
 
         if(errors.length() > 0)
             throw new IllegalArgumentException(errors.toString());
+
+        return null;
     }
 
     /**

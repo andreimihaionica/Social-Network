@@ -48,4 +48,12 @@ public class Conversation {
         return conversation;
     }
 
+    @Override
+    public String toString() {
+        return "Conversation{" +
+                "users='" + users + '\'' +
+                ", stringConversation='" + stringConversation + '\'' +
+                ", conversation=" + conversation +
+                '}';
+    }
 }

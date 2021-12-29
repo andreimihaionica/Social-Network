@@ -67,8 +67,8 @@ public class MessageService {
      * @param date    - LocalDateTime
      * @param reply   - id of reply
      */
-    public void sendMessage(User from, List<User> to, String message, LocalDateTime date, Long reply) {
-        repo.save(new Message(from, to, date, message, reply));
+    public Message sendMessage(User from, List<User> to, String message, LocalDateTime date, Long reply) {
+        return repo.save(new Message(from, to, date, message, reply));
     }
 
 }

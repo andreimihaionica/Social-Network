@@ -93,6 +93,8 @@ public class MessageDB implements Repository<Long, Message> {
                 ps.setLong(5, entity.getReply());
             else ps.setLong(5, 0);
             ps.executeUpdate();
+
+            return entity;
         } catch (SQLException e) {
             e.printStackTrace();
         }
