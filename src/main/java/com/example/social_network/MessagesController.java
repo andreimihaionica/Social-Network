@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,12 +18,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.net.URL;
+import java.util.*;
 
-public class MessagesController {
+public class MessagesController implements Initializable {
 
     private Stage stage;
     private Scene scene;
@@ -42,8 +41,8 @@ public class MessagesController {
     @FXML
     TableColumn conversationColumn;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         currentUser = LogInController.currentUser;
         service = LogInController.service;
 
@@ -110,10 +109,13 @@ public class MessagesController {
     }
 
     public void sendNewMessage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sendNewMessage.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sendNewMessage.fxml"));
+        root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Send new message");
         stage.setScene(new Scene(root));
+        SendNewMessageController sendNewMessageController = fxmlLoader.getController();
+        sendNewMessageController.setService(service, data);
         stage.show();
     }
 

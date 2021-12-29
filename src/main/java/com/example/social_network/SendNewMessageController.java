@@ -1,24 +1,25 @@
 package com.example.social_network;
 
-import com.example.social_network.factory.Factory;
+import com.example.social_network.domain.Message;
 import com.example.social_network.service.Service;
+import com.example.social_network.util.Conversation;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SendNewMessageController {
     private Stage stage;
-    private Scene scene;
-    private Parent root;
 
-    private static final Factory factory = new Factory();
-    public static Service service = factory.getService();
+    private Service service;
+    private ObservableList<Conversation> data;
 
     public static String currentUser;
 
@@ -37,6 +38,11 @@ public class SendNewMessageController {
         service = LogInController.service;
     }
 
+    public void setService(Service service, ObservableList<Conversation> data) {
+        this.service = service;
+        this.data = data;
+    }
+
     public void sendMessage(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -46,7 +52,11 @@ public class SendNewMessageController {
             warningMessage.setText('"' + "Message" + '"' + " field must not be empty!");
         else{
             try {
-                service.sendMessage(currentUser, to.getText(), message.getText(), 0L);
+                Message msg = service.sendMessage(currentUser, to.getText(), message.getText(), 0L);
+                List<Message> msgList = new ArrayList<>();
+                msgList.add(msg);
+                Conversation conversation = new Conversation(msgList, currentUser);
+                MessagesController.data.add(conversation);
             } catch (IllegalArgumentException exception) {
                 warningMessage.setText(exception.getMessage());
             }

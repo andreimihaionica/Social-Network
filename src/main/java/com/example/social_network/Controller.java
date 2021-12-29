@@ -3,6 +3,7 @@ package com.example.social_network;
 import com.example.social_network.domain.FriendshipStatus;
 import com.example.social_network.domain.User;
 import com.example.social_network.service.Service;
+import com.example.social_network.util.Conversation;
 import com.example.social_network.util.SearchUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -152,7 +153,8 @@ public class Controller {
     }
 
     public void messages() throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("receivedMessages.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("receivedMessages.fxml"));
+        root = fxmlLoader.load();
         stage = (Stage) myMenuButton.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
