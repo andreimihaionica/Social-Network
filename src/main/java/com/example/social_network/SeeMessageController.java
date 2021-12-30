@@ -114,7 +114,7 @@ public class SeeMessageController {
         hbox.setVisible(true);
         replyAll = false;
         reply.setDisable(true);
-        if(!isDisableReplyAll) {
+        if (!isDisableReplyAll) {
             replyall.setDisable(false);
         }
     }
@@ -123,7 +123,7 @@ public class SeeMessageController {
         hbox.setVisible(true);
         replyAll = true;
         replyall.setDisable(true);
-        if(!isDisableReply) {
+        if (!isDisableReply) {
             reply.setDisable(false);
         }
     }
@@ -134,8 +134,10 @@ public class SeeMessageController {
             if (replyAll) {
                 String to = "";
                 for (User user : lastMessage.getTo())
-                    to = to + user.getUsername() + ";";
-
+                    if (!Objects.equals(user.getUsername(), currentUser)) {
+                        to = to + user.getUsername() + ";";
+                    }
+                to = to + lastMessage.getFrom().getUsername();
                 Message messageSent = service.sendMessage(currentUser, to, textArea.getText(), lastMessage.getId());
                 hbox.setVisible(false);
                 messages.add(new MessageString(currentUser, to, messageSent.getMessage(), messageSent.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm"))));

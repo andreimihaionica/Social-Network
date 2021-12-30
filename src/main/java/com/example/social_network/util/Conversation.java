@@ -3,6 +3,7 @@ package com.example.social_network.util;
 import com.example.social_network.domain.Message;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,13 +15,16 @@ public class Conversation {
     public Conversation(List<Message> conversation, String currentUser) {
         this.conversation = conversation;
         users = "";
+        List<String> usernames = new ArrayList<>();
         for (var message : conversation) {
-            if (!users.contains(message.getFrom().getUsername()) && !Objects.equals(message.getFrom().getUsername(), currentUser)) {
+            if (!usernames.contains(message.getFrom().getUsername()) && !Objects.equals(message.getFrom().getUsername(), currentUser)) {
                 users = users + message.getFrom().getUsername() + ", ";
+                usernames.add(message.getFrom().getUsername());
             }
             for (var user : message.getTo()) {
-                if (!users.contains(user.getUsername()) && !Objects.equals(user.getUsername(), currentUser)) {
+                if (!usernames.contains(user.getUsername()) && !Objects.equals(user.getUsername(), currentUser)) {
                     users = users + user.getUsername() + ", ";
+                    usernames.add(user.getUsername());
                 }
             }
         }
