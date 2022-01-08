@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.controllers.FriendRequestsController">
+<Pane fx:id="pnlFriendRequests" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: white;" stylesheets="@../../../style/friendRequestsStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.controllers.FriendRequestsController">
    <children>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="600.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Friend requests:" wrappingWidth="513.3890639543533">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Text>
-            <Button mnemonicParsing="false" onAction="#goBack" text="Go back" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="310.0" prefWidth="600.0">
-         <children>
-            <TableView fx:id="tableFriendRequests" prefHeight="310.0" prefWidth="480.0">
-              <columns>
-                <TableColumn fx:id="userColumn" prefWidth="120" text="Username" />
-                  <TableColumn fx:id="dateColumn" prefWidth="120" text="Date" />
-                <TableColumn fx:id="acceptColumn" minWidth="0.0" prefWidth="120" />
-                  <TableColumn fx:id="rejectColumn" prefWidth="120" />
-              </columns>
-            </TableView>
-         </children>
-      </HBox>
+      <Label alignment="CENTER" layoutX="24.0" layoutY="76.0" prefHeight="35.0" prefWidth="239.0" styleClass="label_friendRequests" text="Friend requests" textFill="#05071f">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="24.0" layoutY="158.0" prefHeight="382.0" prefWidth="746.0" style="-fx-background-color: white;">
+         <content>   
+            <VBox fx:id="friendRequestItems" prefHeight="374.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: white;">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Button layoutX="658.0" layoutY="80.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="112.0" styleClass="button_refresh" text="Refresh">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/refresh.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
-</VBox>
+</Pane>

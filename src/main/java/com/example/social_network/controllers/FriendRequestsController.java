@@ -1,102 +1,86 @@
 package com.example.social_network.controllers;
 
-import com.example.social_network.service.Service;
-import com.example.social_network.util.FriendRequest;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class FriendRequestsController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
-    public static String currentUser;
-    private static Service service;
-
     @FXML
-    TableView tableFriendRequests;
-
-    @FXML
-    TableColumn userColumn;
-
-    @FXML
-    TableColumn dateColumn;
-
-    @FXML
-    TableColumn acceptColumn;
-
-    @FXML
-    TableColumn rejectColumn;
+    VBox friendRequestItems;
 
     @FXML
     public void initialize() {
-        currentUser = LogInController.currentUser;
-        service = LogInController.service;
+        friendRequestItems.getChildren().clear();
 
-        if (tableFriendRequests != null) {
-            tableFriendRequests.setPlaceholder(new Label("You don't have any friend request."));
-            userColumn.setCellValueFactory(new PropertyValueFactory<FriendRequest, String>("username"));
-            dateColumn.setCellValueFactory(new PropertyValueFactory<FriendRequest, String>("date"));
-            acceptColumn.setCellValueFactory(new PropertyValueFactory<FriendRequest, Button>("accept"));
-            rejectColumn.setCellValueFactory(new PropertyValueFactory<FriendRequest, Button>("reject"));
+        Node node;
+        FriendRequestItemController controller;
 
-            userColumn.setStyle("-fx-alignment: CENTER;");
-            dateColumn.setStyle("-fx-alignment: CENTER;");
-            acceptColumn.setStyle("-fx-alignment: CENTER;");
-            rejectColumn.setStyle("-fx-alignment: CENTER;");
-
-            tableFriendRequests.setItems(searchFriendRequests());
-        }
-
-    }
-
-    private ObservableList<FriendRequest> searchFriendRequests() {
-        ObservableList<FriendRequest> data = FXCollections.observableArrayList();
-
-        String username, date;
         List<String> split;
+        String username, date;
 
-        for (String friendRequest : service.getAllPendingFriendships(currentUser)) {
-            split = List.of(friendRequest.split(" "));
-            username = split.get(0);
-            date = split.get(2);
+        for (String friendRequest : SignInController.service.getAllPendingFriendships(SignInController.currentUser)) {
+            try {
+                split = List.of(friendRequest.split(" "));
+                username = split.get(0);
+                date = split.get(2);
 
-            FriendRequest friendRequest1 = new FriendRequest(username, date);
-            friendRequest1.getAccept().setOnAction(e -> {
-                service.updateFriendshipStatus(currentUser, friendRequest1.getUsername(), "APPROVED");
-                tableFriendRequests.getItems().remove(friendRequest1);
-            });
-            friendRequest1.getReject().setOnAction(e -> {
-                service.updateFriendshipStatus(currentUser, friendRequest1.getUsername(), "REJECTED");
-                tableFriendRequests.getItems().remove(friendRequest1);
-            });
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/social_network/friendRequest.fxml"));
+                node = fxmlLoader.load();
 
-            data.add(friendRequest1);
+                controller = fxmlLoader.getController();
+                controller.initialize(username, date);
+
+                String finalUsername = username;
+                Node finalNode = node;
+                controller.getBtnAccept().setOnAction(e -> {
+                    SignInController.service.updateFriendshipStatus(SignInController.currentUser, finalUsername, "APPROVED");
+                    refresh();
+                });
+
+                controller.getBtnReject().setOnAction(e -> {
+                    SignInController.service.updateFriendshipStatus(SignInController.currentUser, finalUsername, "REJECTED");
+                    refresh();
+                });
+
+                node.setOnMouseEntered(event -> finalNode.setStyle("-fx-background-color : #0A0E3F"));
+
+                node.setOnMouseExited(event -> {
+                    finalNode.setStyle("-fx-background-color : linear-gradient(to bottom left, #05071F, #431FA0)");
+                    finalNode.setStyle("-fx-background-radius: 10");
+                });
+
+                friendRequestItems.getChildren().add(node);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        return data;
+        if(friendRequestItems.getChildren().size() == 0) {
+            HBox hbox = new HBox();
+            hbox.setPrefWidth(744);
+            hbox.setPrefHeight(350);
+            hbox.setAlignment(Pos.CENTER);
+
+            Label text = new Label();
+            text.setText("You don't have any friend requests.");
+            text.setStyle("-fx-text-fill: #05071F");
+            text.setStyle("-fx-font-size: 20");
+
+            hbox.getChildren().add(text);
+            friendRequestItems.getChildren().add(hbox);
+        }
     }
-    public void goBack(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/socialNetwork.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+    public void refresh() {
+        initialize();
     }
+
 }
+

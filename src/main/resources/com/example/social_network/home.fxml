@@ -48,7 +48,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../style/homeStyle.css" text="Overview" textFill="#e7e5e5">
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#changePaneToOverview" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../style/homeStyle.css" text="Overview" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,7 +66,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Messages">
+            <Button fx:id="btnMessages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Messages">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -80,9 +80,9 @@
             </Button>
             <MenuButton alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../style/homeStyle.css" text="Friends">
               <items>
-                <MenuItem mnemonicParsing="false" text="Friend requests" />
-                  <MenuItem mnemonicParsing="false" text="Sugestions" />
-                <MenuItem mnemonicParsing="false" text="All friends" />
+                <MenuItem fx:id="btnFriendRequests" mnemonicParsing="false" onAction="#changePaneToFriendRequests" text="Friend requests" />
+                  <MenuItem fx:id="btnSugestions" mnemonicParsing="false" text="Sugestions" />
+                <MenuItem fx:id="btnAllFriends" mnemonicParsing="false" text="All friends" />
               </items>
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -95,7 +95,7 @@
                   <Insets left="42.0" />
                </padding>
             </MenuButton>
-            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Events">
+            <Button fx:id="btnEvents" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Events">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -107,7 +107,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Statistics">
+            <Button fx:id="btnStatistics" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Statistics">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -135,10 +135,7 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="258.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" />
-            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" />
-            <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
-            <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" visible="false">
+            <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
                <children>
                   <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" />
                   <Label layoutX="57.0" layoutY="25.0" text="Restaurant Orders" textFill="#e7e5e5">
@@ -235,24 +232,16 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="friendRequests" prefHeight="554.0" prefWidth="793.0">
-               <children>
-                  <Label layoutX="24.0" layoutY="84.0" text="Friend requests" textFill="#05071f">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <ScrollPane layoutX="14.0" layoutY="171.0" prefHeight="391.0" prefWidth="746.0" stylesheets="@../../../style/homeStyle.css">
-                     <content>
-                        <VBox fx:id="friendRequestItems" prefHeight="391.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #ffffff;">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
-               </children>
+            <Pane fx:id="pnlMessages" prefHeight="200.0" prefWidth="200.0" />
+
+            <Pane fx:id="pnlFriendRequests" prefHeight="554.0" prefWidth="793.0" visible="false">
+            <fx:include source="friendRequests.fxml" />
             </Pane>
+
+            <Pane fx:id="pnlSugestions" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="pnlAllFriends" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="pnlEvents" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="pnlStatistics" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </StackPane>
    </children>

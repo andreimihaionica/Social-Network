@@ -33,7 +33,7 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text=" accept" textFill="#e4eefd">
+            <Button fx:id="btnAccept" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" stylesheets="@../../../style/friendRequestItemStyle.css" text=" accept" textFill="#e4eefd">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -48,7 +48,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;"  text=" reject" textFill="#e4eefd">
+            <Button fx:id="btnReject" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" stylesheets="@../../../style/friendRequestItemStyle.css" text=" reject" textFill="#e4eefd">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
