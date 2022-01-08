@@ -1,9 +1,8 @@
-package com.example.social_network;
+package com.example.social_network.controllers;
 
 import com.example.social_network.domain.FriendshipStatus;
 import com.example.social_network.domain.User;
 import com.example.social_network.service.Service;
-import com.example.social_network.util.Conversation;
 import com.example.social_network.util.SearchUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -126,7 +125,7 @@ public class Controller {
 
     private void sceneRefresh() {
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("socialNetwork.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/socialNetwork.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -137,7 +136,7 @@ public class Controller {
     }
 
     public void logOut() throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("logIn.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/logIn.fxml")));
         stage = (Stage) myMenuButton.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -145,7 +144,7 @@ public class Controller {
     }
 
     public void friendRequests() throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("friendRequests.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/friendRequests.fxml")));
         stage = (Stage) myMenuButton.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -153,7 +152,7 @@ public class Controller {
     }
 
     public void messages() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("receivedMessages.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/social_network/receivedMessages.fxml"));
         root = fxmlLoader.load();
         stage = (Stage) myMenuButton.getScene().getWindow();
         scene = new Scene(root);

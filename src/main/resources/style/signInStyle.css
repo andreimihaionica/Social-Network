@@ -1,0 +1,40 @@
+.linear-grad
+{
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+}
+
+.button1
+{
+        -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-text-fill: #E4EEFD;
+}
+
+.button1:hover
+{
+    -fx-text-fill: #05071F;
+}
+
+.button1:pressed
+{
+    -fx-text-fill: #05071F;
+    -fx-background-radius: 20;
+}
+
+.button2
+{
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 5;
+    -fx-text-fill: #E4EEFD;
+    -fx-border-radius: 5;
+}
+
+.button2:hover
+{
+    -fx-text-fill: #05071F;
+}
+
+.button2:pressed
+{
+    -fx-text-fill: #05071F;
+    -fx-background-radius: 20;
+}

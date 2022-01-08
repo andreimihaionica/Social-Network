@@ -1,4 +1,4 @@
-package com.example.social_network;
+package com.example.social_network.controllers;
 
 import com.example.social_network.domain.Message;
 import com.example.social_network.domain.User;
@@ -153,7 +153,7 @@ public class SeeMessageController {
     }
 
     public void goBack(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("receivedMessages.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/receivedMessages.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

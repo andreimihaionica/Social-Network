@@ -2,8 +2,6 @@ package com.example.social_network;
 
 import com.example.social_network.factory.Factory;
 
-import java.util.List;
-
 /**
  * Main class
  */

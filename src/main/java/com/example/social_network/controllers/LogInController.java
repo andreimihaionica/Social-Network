@@ -1,4 +1,4 @@
-package com.example.social_network;
+package com.example.social_network.controllers;
 
 import com.example.social_network.factory.Factory;
 import com.example.social_network.service.Service;
@@ -35,7 +35,7 @@ public class LogInController {
         if (service.getUser(usernameField.getText()) != null) {
             currentUser = usernameField.getText();
 
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("socialNetwork.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/socialNetwork.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

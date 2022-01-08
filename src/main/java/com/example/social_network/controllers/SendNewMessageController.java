@@ -1,4 +1,4 @@
-package com.example.social_network;
+package com.example.social_network.controllers;
 
 import com.example.social_network.domain.Message;
 import com.example.social_network.service.Service;

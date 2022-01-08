@@ -1,0 +1,104 @@
+.linear-grad
+{
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+}
+
+.button
+{
+    -fx-background-color: transparent;
+    -fx-text-fill : #E4EEFD;
+    -fx-font-size : 13px;
+}
+
+.button:hover{
+    -fx-background-color : #431FA0;
+}
+
+.button:pressed
+{
+    -fx-background-color : #05071F;
+}
+
+.menu-button
+{
+    -fx-background-color:transparent;
+    -fx-text-fill : #E4EEFD;
+    -fx-font-size : 13px;
+}
+
+.menu-button:hover
+{
+    -fx-background-color : #431FA0;
+}
+
+.menu-button:pressed
+{
+    -fx-background-color : #05071F;
+}
+.menu-button .label
+{
+    -fx-background-color:transparent;
+    -fx-text-fill: #E4EEFD;
+}
+
+.menu-item .label
+{
+    -fx-text-fill: #E4EEFD;
+}
+
+.menu-item:focused
+{
+    -fx-background-color: darkgray;
+}
+
+.menu-item:focused .label
+{
+    -fx-text-fill: #431FA0;
+}
+
+.context-menu
+{
+    -fx-background-color: #05071F;
+    -fx-pref-width: 256;
+}
+
+.scroll-pane
+{
+    -fx-background-color: white;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical
+{
+    -fx-background-color:transparent;
+}
+
+.scroll-bar:horizontal
+{
+    -fx-opacity: 0;
+}
+
+.increment-button, .decrement-button
+{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track
+{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb
+{
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner
+{
+    -fx-background-color: white;
+}
