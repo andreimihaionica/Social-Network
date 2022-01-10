@@ -82,7 +82,7 @@
               <items>
                 <MenuItem fx:id="btnFriendRequests" mnemonicParsing="false" onAction="#changePaneToFriendRequests" text="Friend requests" />
                   <MenuItem fx:id="btnSugestions" mnemonicParsing="false" text="Sugestions" />
-                <MenuItem fx:id="btnAllFriends" mnemonicParsing="false" text="All friends" />
+                <MenuItem fx:id="btnAllFriends" mnemonicParsing="false" onAction="#changePaneToAllFriends" text="All friends" />
               </items>
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -238,8 +238,11 @@
             <fx:include source="friendRequests.fxml" />
             </Pane>
 
-            <Pane fx:id="pnlSugestions" prefHeight="200.0" prefWidth="200.0" />
-            <Pane fx:id="pnlAllFriends" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="pnlSugestions" prefHeight="200.0" prefWidth="200.0" visible="false" />
+            <Pane fx:id="pnlAllFriends" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <fx:include source="allFriends.fxml" />
+            </Pane>
+
             <Pane fx:id="pnlEvents" prefHeight="200.0" prefWidth="200.0" />
             <Pane fx:id="pnlStatistics" prefHeight="200.0" prefWidth="200.0" />
          </children>

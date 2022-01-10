@@ -11,27 +11,28 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 
-public class FriendRequestsController {
+public class AllFriendsController {
     @FXML
-    VBox friendRequestItems;
+    VBox friendItems;
 
     @FXML
     public void initialize() {
-        friendRequestItems.getChildren().clear();
+        friendItems.getChildren().clear();
 
         Node node;
-        FriendRequestItemController controller;
+        FriendItemController controller;
 
         List<String> split;
         String username, date;
 
-        for (String friendRequest : SignInController.service.getAllPendingFriendships(SignInController.currentUser)) {
+
+        for (String friend : SignInController.service.getAllFriendsForUser(SignInController.currentUser)) {
             try {
-                split = List.of(friendRequest.split(" "));
+                split = List.of(friend.split(" "));
                 username = split.get(0);
                 date = split.get(2);
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/social_network/friendRequest.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/social_network/friendItem.fxml"));
                 node = fxmlLoader.load();
 
                 controller = fxmlLoader.getController();
@@ -39,14 +40,9 @@ public class FriendRequestsController {
 
                 String finalUsername = username;
                 Node finalNode = node;
-                controller.getBtnAccept().setOnAction(e -> {
-                    SignInController.service.updateFriendshipStatus(SignInController.currentUser, finalUsername, "APPROVED");
-                    friendRequestItems.getChildren().remove(finalNode);
-                });
-
-                controller.getBtnReject().setOnAction(e -> {
-                    SignInController.service.updateFriendshipStatus(SignInController.currentUser, finalUsername, "REJECTED");
-                    friendRequestItems.getChildren().remove(finalNode);
+                controller.getBtnRemove().setOnAction(e -> {
+                    SignInController.service.deleteFriendship(SignInController.currentUser, finalUsername);
+                    friendItems.getChildren().remove(finalNode);
                 });
 
                 node.setOnMouseEntered(event -> finalNode.setStyle("-fx-background-color : #0A0E3F"));
@@ -56,31 +52,29 @@ public class FriendRequestsController {
                     finalNode.setStyle("-fx-background-radius: 10");
                 });
 
-                friendRequestItems.getChildren().add(node);
+                friendItems.getChildren().add(node);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        if(friendRequestItems.getChildren().size() == 0) {
+        if(friendItems.getChildren().size() == 0) {
             HBox hbox = new HBox();
             hbox.setPrefWidth(744);
             hbox.setPrefHeight(350);
             hbox.setAlignment(Pos.CENTER);
 
             Label text = new Label();
-            text.setText("You don't have any friend requests.");
+            text.setText("You don't have any friends.");
             text.setStyle("-fx-text-fill: #05071F");
             text.setStyle("-fx-font-size: 20");
 
             hbox.getChildren().add(text);
-            friendRequestItems.getChildren().add(hbox);
+            friendItems.getChildren().add(hbox);
         }
     }
 
     public void refresh() {
         initialize();
     }
-
 }
-
