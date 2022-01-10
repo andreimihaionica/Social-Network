@@ -1,22 +1,10 @@
 package com.example.social_network.factory;
 
 import com.example.social_network.UI.UI;
-import com.example.social_network.domain.Friendship;
-import com.example.social_network.domain.Message;
-import com.example.social_network.domain.Tuple;
-import com.example.social_network.domain.User;
-import com.example.social_network.domain.validators.FriendshipValidator;
-import com.example.social_network.domain.validators.MessageValidator;
-import com.example.social_network.domain.validators.UserValidator;
-import com.example.social_network.domain.validators.Validator;
-import com.example.social_network.repository.FriendshipDB;
-import com.example.social_network.repository.MessageDB;
-import com.example.social_network.repository.Repository;
-import com.example.social_network.repository.UserDB;
-import com.example.social_network.service.FriendshipService;
-import com.example.social_network.service.MessageService;
-import com.example.social_network.service.Service;
-import com.example.social_network.service.UserService;
+import com.example.social_network.domain.*;
+import com.example.social_network.domain.validators.*;
+import com.example.social_network.repository.*;
+import com.example.social_network.service.*;
 
 public class Factory {
     private UserService getUserService() {
@@ -37,8 +25,14 @@ public class Factory {
         return new MessageService(messageRepository);
     }
 
+    private PasswordService getPasswordService() {
+        Validator<Password> passwordValidator = new PasswordValidator();
+        Repository<Long, Password> passwordRepository = new PasswordDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", passwordValidator);
+        return new PasswordService(passwordRepository);
+    }
+
     public Service getService() {
-        return new Service(getUserService(), getFriendshipService(), getMessageService());
+        return new Service(getUserService(), getFriendshipService(), getMessageService(), getPasswordService());
     }
 
     public UI getUI() {

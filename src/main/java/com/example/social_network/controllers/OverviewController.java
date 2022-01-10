@@ -41,22 +41,22 @@ public class OverviewController {
 
         for (User user : service.getAllUsers()) {
             try {
-                if(service.getFriendship(SignInController.currentUser, user.getUsername()) == null) {
+                if (service.getFriendship(SignInController.currentUser, user.getUsername()) == null) {
                     suggestedUserItems.getChildren().add(getNode(user.getUsername(), false));
                     noSuggestions--;
-                    if(noSuggestions == 0)
+                    if (noSuggestions == 0)
                         break;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            }
+        }
 
-            verifica();
+        verifica();
     }
 
     public void searchUser(KeyEvent keyEvent) {
-        if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             refresh();
         }
     }
@@ -69,10 +69,10 @@ public class OverviewController {
 
         for (User user : service.getAllUsers()) {
             try {
-                if(user.getUsername().startsWith(searchUser.getText()) && !Objects.equals(user.getUsername(), SignInController.currentUser)) {
+                if (user.getUsername().startsWith(searchUser.getText()) && !Objects.equals(user.getUsername(), SignInController.currentUser) && service.verifyFriendship(SignInController.currentUser, user.getUsername()) != FriendshipStatus.REJECTED) {
                     suggestedUserItems.getChildren().add(getNode(user.getUsername(), true));
                     noSuggestions--;
-                    if(noSuggestions == 0)
+                    if (noSuggestions == 0)
                         break;
                 }
             } catch (IOException e) {
@@ -97,9 +97,9 @@ public class OverviewController {
 
         Friendship friendship = service.getFriendship(SignInController.currentUser, username);
 
-        if(friendship == null) {
+        if (friendship == null) {
             controller.getBtnAddFriend().setText("Add Friend");
-            if(refresh) {
+            if (refresh) {
                 controller.getBtnAddFriend().setOnAction(e -> {
                     service.addFriendship(SignInController.currentUser, username);
                     refresh();
@@ -111,11 +111,11 @@ public class OverviewController {
                 });
             }
         } else {
-            if(friendship.getStatus() == FriendshipStatus.APPROVED) {
+            if (friendship.getStatus() == FriendshipStatus.APPROVED) {
                 controller.getBtnAddFriend().setText("Remove Friend");
                 controller.getIconBtn().setImage(new Image("file:src/main/resources/icons/denied.png"));
 
-                if(refresh) {
+                if (refresh) {
                     controller.getBtnAddFriend().setOnAction(e -> {
                         service.deleteFriendship(SignInController.currentUser, username);
                         refresh();
@@ -128,11 +128,11 @@ public class OverviewController {
                 }
 
             } else {
-                if(friendship.getStatus() == FriendshipStatus.PENDING) {
+                if (friendship.getStatus() == FriendshipStatus.PENDING) {
                     controller.getBtnAddFriend().setText("Cancel Request");
                     controller.getIconBtn().setImage(new Image("file:src/main/resources/icons/cancel.png"));
 
-                    if(refresh) {
+                    if (refresh) {
                         controller.getBtnAddFriend().setOnAction(e -> {
                             service.deleteFriendship(SignInController.currentUser, username);
                             refresh();

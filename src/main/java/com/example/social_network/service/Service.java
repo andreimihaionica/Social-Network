@@ -18,6 +18,7 @@ public class Service {
     private final UserService userService;
     private final FriendshipService friendshipService;
     private final MessageService messageService;
+    private final PasswordService passwordService;
 
     /**
      * Constructor with parameters
@@ -25,10 +26,11 @@ public class Service {
      * @param userService       - UserService
      * @param friendshipService - FriendshipService
      */
-    public Service(UserService userService, FriendshipService friendshipService, MessageService messageService) {
+    public Service(UserService userService, FriendshipService friendshipService, MessageService messageService, PasswordService passwordService) {
         this.userService = userService;
         this.friendshipService = friendshipService;
         this.messageService = messageService;
+        this.passwordService = passwordService;
 
         if (userService.getRepo() instanceof UserDB)
             loadData();
@@ -75,12 +77,13 @@ public class Service {
 
     /**
      * Update user
+     *
      * @param username    - String
      * @param newUsername - String
      */
     public void updateUser(String username, String newUsername) {
         if (userService.getUser(newUsername) == null) {
-            if(userService.getUser(username) != null) {
+            if (userService.getUser(username) != null) {
                 Long id = userService.getUser(username).getId();
                 User user = new User(newUsername);
                 user.setId(id);
@@ -234,7 +237,7 @@ public class Service {
         Graph g = new Graph(nrNoduri);
         Long nod1, nod2;
         for (Friendship friendship : friendshipService.getAll()) {
-            if(friendship.getStatus() == APPROVED) {
+            if (friendship.getStatus() == APPROVED) {
                 nod1 = friendship.getId().getLeft();
                 nod2 = friendship.getId().getRight();
 
@@ -261,7 +264,7 @@ public class Service {
         Graph g = new Graph(nrNoduri);
         Long nod1, nod2;
         for (Friendship friendship : friendshipService.getAll()) {
-            if(friendship.getStatus() == APPROVED) {
+            if (friendship.getStatus() == APPROVED) {
                 nod1 = friendship.getId().getLeft();
                 nod2 = friendship.getId().getRight();
 
@@ -304,6 +307,7 @@ public class Service {
 
     /**
      * Get all friends for one user
+     *
      * @param username - String
      * @return list of string = username + date
      */
@@ -355,10 +359,11 @@ public class Service {
 
     /**
      * Save message
-     * @param from - String
-     * @param to - String
+     *
+     * @param from    - String
+     * @param to      - String
      * @param message - String
-     * @param reply - id of reply
+     * @param reply   - id of reply
      */
     public Message sendMessage(String from, String to, String message, Long reply) {
         User userFrom = null;
@@ -385,7 +390,7 @@ public class Service {
         if (!userTo.isEmpty())
             return messageService.sendMessage(userFrom, userTo, message, date, reply);
 
-        if(errors.length() > 0)
+        if (errors.length() > 0)
             throw new IllegalArgumentException(errors.toString());
 
         return null;
@@ -393,8 +398,9 @@ public class Service {
 
     /**
      * Get all conversations for two users
+     *
      * @param from - username of user1
-     * @param to - username of user2
+     * @param to   - username of user2
      * @return List of conversations
      */
     public List<List<Message>> getConversations(String from, String to) {
@@ -429,26 +435,26 @@ public class Service {
         return conversations;
     }
 
-    public Iterable<Message> getAllMessages(){
+    public Iterable<Message> getAllMessages() {
         return messageService.getAll();
     }
 
     public int getMutualFriends(String username1, String username2) {
         int mutualFriends = 0;
 
-        for(Friendship friendship : getAllFriendships()) {
+        for (Friendship friendship : getAllFriendships()) {
 
-            if(Objects.equals(friendship.getId().getLeft(), getUser(username1).getId())) {
+            if (Objects.equals(friendship.getId().getLeft(), getUser(username1).getId())) {
 
-                if(getFriendship(getUser(friendship.getId().getRight()).getUsername(), username2) != null) {
+                if (getFriendship(getUser(friendship.getId().getRight()).getUsername(), username2) != null) {
                     mutualFriends++;
                 }
 
             }
 
-            if(Objects.equals(friendship.getId().getRight(), getUser(username1).getId())) {
+            if (Objects.equals(friendship.getId().getRight(), getUser(username1).getId())) {
 
-                if(getFriendship(getUser(friendship.getId().getLeft()).getUsername(), username2) != null) {
+                if (getFriendship(getUser(friendship.getId().getLeft()).getUsername(), username2) != null) {
                     mutualFriends++;
                 }
 
@@ -457,5 +463,14 @@ public class Service {
         }
 
         return mutualFriends;
+    }
+
+    public void addPassword(Long userId, String passwordString) {
+        Password password = new Password(userId, passwordString);
+        passwordService.addPassword(password);
+    }
+
+    public Password getPassword(Long userId) {
+        return passwordService.findOne(userId);
     }
 }
