@@ -13,6 +13,7 @@ public class FriendshipService {
 
     /**
      * Constructor with parameters
+     *
      * @param repo - repository
      */
     public FriendshipService(Repository<Tuple<Long, Long>, Friendship> repo) {
@@ -21,6 +22,7 @@ public class FriendshipService {
 
     /**
      * Add friendship in repository
+     *
      * @param utilizator1 - ID of User1
      * @param utilizator2 - ID of User2
      */
@@ -33,23 +35,25 @@ public class FriendshipService {
 
     /**
      * Delete friendship from repository
+     *
      * @param tuple - ID of Friendship
      */
     public void deleteFriendship(Tuple<Long, Long> tuple) {
         repo.delete(tuple);
     }
 
-    public void updateFriendshipStatus (Tuple<Long, Long> id, FriendshipStatus status) {
-        Friendship oldFriendship = repo.findOne(id);
-        Friendship newFriendship = new Friendship(oldFriendship.getDate(), status);
+    public void updateFriendshipStatus(Tuple<Long, Long> id, FriendshipStatus status) {
+        Friendship newFriendship = new Friendship(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), status);
         repo.update(id, newFriendship);
     }
 
     public Friendship findOne(Tuple<Long, Long> id) {
         return repo.findOne(id);
     }
+
     /**
      * Get all friendships
+     *
      * @return List of friendships
      */
     public Iterable<Friendship> getAll() {

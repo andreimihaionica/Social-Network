@@ -24,7 +24,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="246.0" spacing="5.0">
                <children>
-                  <Circle fx:id="btnClose" fill="#fc5d57" radius="6.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Circle fx:id="btnClose" fill="#fc5d57" onMouseClicked="#closeWindow" radius="6.0" stroke="WHITE" strokeType="INSIDE" />
                   <Circle fill="#fdbb2d" radius="6.0" stroke="WHITE" strokeType="INSIDE" />
                   <Circle fill="#27c941" radius="6.0" stroke="WHITE" strokeType="INSIDE" />
                </children>
@@ -37,15 +37,15 @@
                   <Image url="@../../../icons/customer.png" />
                </image>
                <VBox.margin>
-                  <Insets bottom="10.0" top="50.0" />
+                  <Insets bottom="-5.0" top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Label text="Jimmy Fallon" textFill="#e7e5e5">
+            <Label fx:id="lblCurrentUser" alignment="CENTER" prefWidth="92.0" text="Jimmy Fallon" textFill="#e7e5e5">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
             <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#changePaneToOverview" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../style/homeStyle.css" text="Overview" textFill="#e7e5e5">
@@ -78,7 +78,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <MenuButton alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../style/homeStyle.css" text="Friends">
+            <MenuButton alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../style/homeStyle.css" text="Friends" textAlignment="CENTER">
               <items>
                 <MenuItem fx:id="btnFriendRequests" mnemonicParsing="false" onAction="#changePaneToFriendRequests" text="Friend requests" />
                   <MenuItem fx:id="btnSugestions" mnemonicParsing="false" text="Sugestions" />
@@ -119,7 +119,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Sign Out">
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="259.0" text="Sign Out">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>

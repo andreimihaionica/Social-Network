@@ -167,9 +167,9 @@ public class Service {
 
     public void updateFriendshipStatus(String username1, String username2, String status) {
         FriendshipStatus friendshipStatus;
-        if (status.toUpperCase().equals("APPROVED"))
+        if (status.equals("APPROVED"))
             friendshipStatus = APPROVED;
-        else if (status.toUpperCase().equals("REJECTED"))
+        else if (status.equals("REJECTED"))
             friendshipStatus = REJECTED;
         else
             friendshipStatus = PENDING;

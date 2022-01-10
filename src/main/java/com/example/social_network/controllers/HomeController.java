@@ -1,9 +1,16 @@
 package com.example.social_network.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -34,8 +41,14 @@ public class HomeController {
     Pane pnlStatistics;
 
     @FXML
-    public void initialize() {
+    Circle btnClose;
 
+    @FXML
+    Label lblCurrentUser;
+
+    @FXML
+    public void initialize() {
+        lblCurrentUser.setText(SignInController.currentUser);
     }
 
     public void changePaneToOverview() {
@@ -58,5 +71,18 @@ public class HomeController {
         pnlAllFriends.setVisible(false);
         pnlEvents.setVisible(false);
         pnlStatistics.setVisible(false);
+    }
+
+    public void signOut(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/signIn.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void closeWindow() {
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        stage.close();
     }
 }

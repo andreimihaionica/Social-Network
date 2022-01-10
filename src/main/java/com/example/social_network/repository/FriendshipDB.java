@@ -118,13 +118,14 @@ public class FriendshipDB implements Repository<Tuple<Long, Long>, Friendship> {
 
         validator.validate(entity);
 
-        String sql = "update \"Friendships\" set status = (?) where id1 = (?) and id2 = (?)";
+        String sql = "update \"Friendships\" set status = (?), date = (?) where id1 = (?) and id2 = (?)";
 
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, entity.getStatus().toString());
-            ps.setLong(2, id.getLeft());
-            ps.setLong(3, id.getRight());
+            ps.setString(2, entity.getDate());
+            ps.setLong(3, id.getLeft());
+            ps.setLong(4, id.getRight());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
