@@ -211,7 +211,11 @@ public class Service {
     }
 
     public Friendship getFriendship(String username1, String username2) {
-        return friendshipService.findOne(new Tuple<>(getUser(username1).getId(), getUser(username2).getId()));
+        Friendship friendship = friendshipService.findOne(new Tuple<>(getUser(username1).getId(), getUser(username2).getId()));
+        if (friendship == null) {
+            return friendshipService.findOne(new Tuple<>(getUser(username2).getId(), getUser(username1).getId()));
+        }
+        return friendship;
     }
 
     /**
@@ -429,4 +433,29 @@ public class Service {
         return messageService.getAll();
     }
 
+    public int getMutualFriends(String username1, String username2) {
+        int mutualFriends = 0;
+
+        for(Friendship friendship : getAllFriendships()) {
+
+            if(Objects.equals(friendship.getId().getLeft(), getUser(username1).getId())) {
+
+                if(getFriendship(getUser(friendship.getId().getRight()).getUsername(), username2) != null) {
+                    mutualFriends++;
+                }
+
+            }
+
+            if(Objects.equals(friendship.getId().getRight(), getUser(username1).getId())) {
+
+                if(getFriendship(getUser(friendship.getId().getLeft()).getUsername(), username2) != null) {
+                    mutualFriends++;
+                }
+
+            }
+
+        }
+
+        return mutualFriends;
+    }
 }

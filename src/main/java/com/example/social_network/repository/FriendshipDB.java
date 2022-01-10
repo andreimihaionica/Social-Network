@@ -28,9 +28,30 @@ public class FriendshipDB implements Repository<Tuple<Long, Long>, Friendship> {
         if (id == null)
             throw new IllegalArgumentException("Entity does not exist!");
 
-        for (Friendship friendship : findAll()) {
-            if (Objects.equals(friendship.getId(), id))
+        String sql = "SELECT * from \"Friendships\" WHERE id1 = (?) and id2 = (?)";
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, id.getLeft());
+            ps.setLong(2, id.getRight());
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                String date = resultSet.getString("date");
+                String status = resultSet.getString("status");
+
+                FriendshipStatus friendshipStatus = switch (status) {
+                    case "APPROVED" -> APPROVED;
+                    case "REJECTED" -> REJECTED;
+                    case "PENDING" -> PENDING;
+                    default -> null;
+                };
+
+                Friendship friendship = new Friendship(date, friendshipStatus);
+                friendship.setId(id);
+
                 return friendship;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }

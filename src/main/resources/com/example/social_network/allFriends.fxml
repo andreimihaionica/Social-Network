@@ -19,7 +19,7 @@
       </Label>
       <ScrollPane layoutX="24.0" layoutY="158.0" prefHeight="382.0" prefWidth="746.0" style="-fx-background-color: white;">
          <content>
-            <VBox fx:id="friendItems" alignment="CENTER" prefHeight="374.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: white;">
+            <VBox fx:id="friendItems" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: white;">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>

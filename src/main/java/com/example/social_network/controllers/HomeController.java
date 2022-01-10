@@ -47,11 +47,14 @@ public class HomeController {
     Label lblCurrentUser;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         lblCurrentUser.setText(SignInController.currentUser);
+        changePaneToOverview();
     }
 
-    public void changePaneToOverview() {
+    public void changePaneToOverview() throws IOException {
+        pnlOverview.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/overview.fxml"))));
+
         pnlOverview.setVisible(true);
         pnlMessages.setVisible(false);
         pnlFriendRequests.setVisible(false);
@@ -74,7 +77,7 @@ public class HomeController {
     }
 
     public void changePaneToAllFriends() throws IOException {
-        pnlFriendRequests.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/allFriends.fxml"))));
+        pnlAllFriends.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/allFriends.fxml"))));
 
         pnlOverview.setVisible(false);
         pnlMessages.setVisible(false);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="pnlFriendRequests" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: white;" styleClass="pane" stylesheets="@../../../style/friendRequestsStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.controllers.OverviewController">
+   <children>
+      <TextField fx:id="searchUser" layoutX="618.0" layoutY="80.0" onKeyPressed="#searchUser" prefHeight="27.0" prefWidth="152.0" promptText="search..." stylesheets="@../../../style/overviewStyle.css" />
+      <Label fx:id="lblText" layoutX="62.0" layoutY="148.0" text="People You May Know:" textFill="#05071f">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="739.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/icons8_Search_52px.png" />
+         </image>
+      </ImageView>
+      <ScrollPane layoutX="24.0" layoutY="189.0" prefHeight="382.0" prefWidth="746.0" style="-fx-background-color: white;">
+         <content>
+            <VBox fx:id="suggestedUserItems" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: white;">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Label alignment="CENTER" layoutX="24.0" layoutY="76.0" prefHeight="35.0" prefWidth="239.0" styleClass="label_Overview" stylesheets="@../../../style/overviewStyle.css" text="Overview" textFill="#05071f">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

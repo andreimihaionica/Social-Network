@@ -1,0 +1,21 @@
+.text-field {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 20;
+    -fx-text-fill : #E4EEFD;
+    -fx-font-size : 13px;
+    -fx-prompt-text-fill: #E4EEFD;
+}
+
+.text-field:hover{
+    -fx-background-radius: 0;
+}
+
+.label_Overview {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 20;
+    -fx-text-fill : #E4EEFD;
+}
+
+.pane {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+}
