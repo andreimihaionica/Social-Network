@@ -4,15 +4,18 @@ import com.example.social_network.domain.Friendship;
 import com.example.social_network.domain.FriendshipStatus;
 import com.example.social_network.domain.Tuple;
 import com.example.social_network.domain.validators.Validator;
+import com.example.social_network.repository.paging.Page;
+import com.example.social_network.repository.paging.Pageable;
+import com.example.social_network.repository.paging.Paginator;
+import com.example.social_network.repository.paging.PagingRepository;
 
 import java.sql.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import static com.example.social_network.domain.FriendshipStatus.*;
 
-public class FriendshipDB implements Repository<Tuple<Long, Long>, Friendship> {
+public class FriendshipDB implements PagingRepository<Tuple<Long, Long>, Friendship> {
     private String url, username, password;
     Validator<Friendship> validator;
 
@@ -152,5 +155,11 @@ public class FriendshipDB implements Repository<Tuple<Long, Long>, Friendship> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Page<Friendship> findAll(Pageable pageable) {
+        Paginator<Friendship> paginator = new Paginator<>(pageable, this.findAll());
+        return paginator.paginate();
     }
 }

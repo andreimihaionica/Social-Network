@@ -2,13 +2,17 @@ package com.example.social_network.repository;
 
 import com.example.social_network.domain.User;
 import com.example.social_network.domain.validators.Validator;
+import com.example.social_network.repository.paging.Page;
+import com.example.social_network.repository.paging.Pageable;
+import com.example.social_network.repository.paging.Paginator;
+import com.example.social_network.repository.paging.PagingRepository;
 
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class UserDB implements Repository<Long, User> {
+public class UserDB implements PagingRepository<Long, User> {
     private String url, username, password;
     private Validator<User> validator;
 
@@ -107,5 +111,11 @@ public class UserDB implements Repository<Long, User> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Page<User> findAll(Pageable pageable) {
+        Paginator<User> paginator = new Paginator<>(pageable, this.findAll());
+        return paginator.paginate();
     }
 }

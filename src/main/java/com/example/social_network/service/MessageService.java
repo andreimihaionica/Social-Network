@@ -2,21 +2,26 @@ package com.example.social_network.service;
 
 import com.example.social_network.domain.Message;
 import com.example.social_network.domain.User;
-import com.example.social_network.repository.Repository;
+import com.example.social_network.repository.paging.Page;
+import com.example.social_network.repository.paging.Pageable;
+import com.example.social_network.repository.paging.PageableImplementation;
+import com.example.social_network.repository.paging.PagingRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MessageService {
-    private Repository<Long, Message> repo;
+    private PagingRepository<Long, Message> repo;
 
     /**
      * Constructor with parameters
      *
      * @param repo - repository
      */
-    public MessageService(Repository<Long, Message> repo) {
+    public MessageService(PagingRepository<Long, Message> repo) {
         this.repo = repo;
     }
 
@@ -71,4 +76,9 @@ public class MessageService {
         return repo.save(new Message(from, to, date, message, reply));
     }
 
+    public Set<Message> getMessagesOnPage(int page) {
+        Pageable pageable = new PageableImplementation(page, 5);
+        Page<Message> messagePage = repo.findAll(pageable);
+        return messagePage.getContent().collect(Collectors.toSet());
+    }
 }

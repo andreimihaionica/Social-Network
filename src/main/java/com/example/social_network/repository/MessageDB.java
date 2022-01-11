@@ -3,12 +3,16 @@ package com.example.social_network.repository;
 import com.example.social_network.domain.Message;
 import com.example.social_network.domain.User;
 import com.example.social_network.domain.validators.Validator;
+import com.example.social_network.repository.paging.Page;
+import com.example.social_network.repository.paging.Pageable;
+import com.example.social_network.repository.paging.Paginator;
+import com.example.social_network.repository.paging.PagingRepository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class MessageDB implements Repository<Long, Message> {
+public class MessageDB implements PagingRepository<Long, Message> {
     private String url, username, password;
     private Validator<Message> validator;
 
@@ -122,5 +126,11 @@ public class MessageDB implements Repository<Long, Message> {
     @Override
     public Message update(Long aLong, Message entity) {
         return null;
+    }
+
+    @Override
+    public Page<Message> findAll(Pageable pageable) {
+        Paginator<Message> paginator = new Paginator<>(pageable, this.findAll());
+        return paginator.paginate();
     }
 }

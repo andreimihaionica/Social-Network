@@ -1,7 +1,7 @@
 package com.example.social_network.controllers;
 
+import com.example.social_network.Application;
 import com.example.social_network.domain.Password;
-import com.example.social_network.domain.User;
 import com.example.social_network.factory.Factory;
 import com.example.social_network.service.Service;
 import javafx.fxml.FXML;
@@ -29,6 +29,7 @@ public class SignInController {
     public static Service service = factory.getService();
 
     public static String currentUser;
+
     @FXML
     Pane paneSignIn;
 
@@ -79,6 +80,9 @@ public class SignInController {
                     Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/home.fxml")));
                     Stage stage = (Stage) (btnSignIn.getScene().getWindow());
                     Scene scene = new Scene(root);
+
+                    Application.movableStage(root, stage);
+
                     stage.setScene(scene);
                     stage.show();
                 } else {
@@ -86,8 +90,6 @@ public class SignInController {
                 }
             }
         }
-
-
     }
 
     public void signUp() {

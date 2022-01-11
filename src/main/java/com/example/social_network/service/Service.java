@@ -106,6 +106,10 @@ public class Service {
         return userService.getAll();
     }
 
+    public Set<User> getUsersOnPage(int page) {
+        return userService.getUsersOnPage(page);
+    }
+
     /**
      * Get User by ID
      *
@@ -187,6 +191,10 @@ public class Service {
      */
     public Iterable<Friendship> getAllFriendships() {
         return friendshipService.getAll();
+    }
+
+    public Set<Friendship> getFriendshipsOnPage(int page) {
+        return friendshipService.getFriendshipsOnPage(page);
     }
 
     public FriendshipStatus verifyFriendship(String username1, String username2) {
@@ -437,6 +445,10 @@ public class Service {
 
     public Iterable<Message> getAllMessages() {
         return messageService.getAll();
+    }
+
+    public Set<Message> getMessagesOnPage(int page) {
+        return messageService.getMessagesOnPage(page);
     }
 
     public int getMutualFriends(String username1, String username2) {

@@ -17,8 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class OverviewController {
     Service service;
@@ -37,22 +36,50 @@ public class OverviewController {
         service = SignInController.service;
         suggestedUserItems.getChildren().clear();
 
+        Iterable<Friendship> friendships = service.getAllFriendships();
+        Iterable<User> users = service.getAllUsers();
+
         int noSuggestions = 5;
 
-        for (User user : service.getAllUsers()) {
+        for (User user : users) {
             try {
-                if (service.getFriendship(SignInController.currentUser, user.getUsername()) == null) {
+                if (!Objects.equals(SignInController.currentUser, user.getUsername()) && getFriendship(SignInController.currentUser, user.getUsername(), users, friendships) == null) {
                     suggestedUserItems.getChildren().add(getNode(user.getUsername(), false));
+
                     noSuggestions--;
-                    if (noSuggestions == 0)
+                    if(noSuggestions == 0)
                         break;
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        verifica();
+        verify();
+    }
+
+    public Friendship getFriendship(String username1, String username2, Iterable<User> users, Iterable<Friendship> friendships) {
+        User user1 = null, user2 = null;
+        for(User user : users) {
+            if(Objects.equals(user.getUsername(), username1))
+                user1 = user;
+
+            if(Objects.equals(user.getUsername(), username2))
+                user2 = user;
+        }
+
+        if(user1 != null && user2 != null) {
+            for(Friendship friendship : friendships ) {
+                if (Objects.equals(friendship.getId().getLeft(), user1.getId()) && Objects.equals(friendship.getId().getRight(), user2.getId()))
+                    return friendship;
+
+                if (Objects.equals(friendship.getId().getRight(), user1.getId()) && Objects.equals(friendship.getId().getLeft(), user2.getId()))
+                    return friendship;
+            }
+        }
+
+        return null;
     }
 
     public void searchUser(KeyEvent keyEvent) {
@@ -80,7 +107,7 @@ public class OverviewController {
             }
         }
 
-        verifica();
+        verify();
     }
 
     public Node getNode(String username, boolean refresh) throws IOException {
@@ -158,7 +185,7 @@ public class OverviewController {
         return node;
     }
 
-    public void verifica() {
+    public void verify() {
         if (suggestedUserItems.getChildren().size() == 0) {
             HBox hbox = new HBox();
             hbox.setPrefWidth(744);

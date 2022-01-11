@@ -3,20 +3,25 @@ package com.example.social_network.service;
 import com.example.social_network.domain.Friendship;
 import com.example.social_network.domain.FriendshipStatus;
 import com.example.social_network.domain.Tuple;
-import com.example.social_network.repository.Repository;
+import com.example.social_network.repository.paging.Page;
+import com.example.social_network.repository.paging.Pageable;
+import com.example.social_network.repository.paging.PageableImplementation;
+import com.example.social_network.repository.paging.PagingRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FriendshipService {
-    private Repository<Tuple<Long, Long>, Friendship> repo;
+    private PagingRepository<Tuple<Long, Long>, Friendship> repo;
 
     /**
      * Constructor with parameters
      *
      * @param repo - repository
      */
-    public FriendshipService(Repository<Tuple<Long, Long>, Friendship> repo) {
+    public FriendshipService(PagingRepository<Tuple<Long, Long>, Friendship> repo) {
         this.repo = repo;
     }
 
@@ -58,5 +63,11 @@ public class FriendshipService {
      */
     public Iterable<Friendship> getAll() {
         return repo.findAll();
+    }
+
+    public Set<Friendship> getFriendshipsOnPage(int page) {
+        Pageable pageable = new PageableImplementation(page, 5);
+        Page<Friendship> friendshipPage = repo.findAll(pageable);
+        return friendshipPage.getContent().collect(Collectors.toSet());
     }
 }

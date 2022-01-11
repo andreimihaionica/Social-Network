@@ -2,18 +2,24 @@ package com.example.social_network.service;
 
 import com.example.social_network.domain.User;
 import com.example.social_network.repository.Repository;
+import com.example.social_network.repository.paging.Page;
+import com.example.social_network.repository.paging.Pageable;
+import com.example.social_network.repository.paging.PageableImplementation;
+import com.example.social_network.repository.paging.PagingRepository;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserService {
-    private final Repository<Long, User> repo;
+    private final PagingRepository<Long, User> repo;
     private Long id = 1L + (long) (Math.random() * (1000000L - 1L));
 
     /**
      * Constructor with parameter
      * @param repo - repository
      */
-    public UserService(Repository<Long, User> repo) {
+    public UserService(PagingRepository<Long, User> repo) {
         this.repo = repo;
     }
 
@@ -111,5 +117,11 @@ public class UserService {
      */
     public Iterable<User> getAll() {
         return repo.findAll();
+    }
+
+    public Set<User> getUsersOnPage(int page) {
+        Pageable pageable = new PageableImplementation(page, 5);
+        Page<User> usersPage = repo.findAll(pageable);
+        return usersPage.getContent().collect(Collectors.toSet());
     }
 }
