@@ -36,10 +36,10 @@ public class OverviewController {
         service = SignInController.service;
         suggestedUserItems.getChildren().clear();
 
+        int noSuggestions = 5;
+
         Iterable<Friendship> friendships = service.getAllFriendships();
         Iterable<User> users = service.getAllUsers();
-
-        int noSuggestions = 5;
 
         for (User user : users) {
             try {
@@ -47,7 +47,7 @@ public class OverviewController {
                     suggestedUserItems.getChildren().add(getNode(user.getUsername(), false));
 
                     noSuggestions--;
-                    if(noSuggestions == 0)
+                    if (noSuggestions == 0)
                         break;
                 }
 
@@ -61,16 +61,16 @@ public class OverviewController {
 
     public Friendship getFriendship(String username1, String username2, Iterable<User> users, Iterable<Friendship> friendships) {
         User user1 = null, user2 = null;
-        for(User user : users) {
-            if(Objects.equals(user.getUsername(), username1))
+        for (User user : users) {
+            if (Objects.equals(user.getUsername(), username1))
                 user1 = user;
 
-            if(Objects.equals(user.getUsername(), username2))
+            if (Objects.equals(user.getUsername(), username2))
                 user2 = user;
         }
 
-        if(user1 != null && user2 != null) {
-            for(Friendship friendship : friendships ) {
+        if (user1 != null && user2 != null) {
+            for (Friendship friendship : friendships) {
                 if (Objects.equals(friendship.getId().getLeft(), user1.getId()) && Objects.equals(friendship.getId().getRight(), user2.getId()))
                     return friendship;
 

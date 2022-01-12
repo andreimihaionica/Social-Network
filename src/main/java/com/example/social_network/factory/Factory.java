@@ -32,8 +32,14 @@ public class Factory {
         return new PasswordService(passwordRepository);
     }
 
+    private EventService getEventService() {
+        Validator<Event> eventValidator = new EventValidator();
+        PagingRepository<Long, Event> eventRepository = new EventDB("jdbc:postgresql://localhost:5432/SocialNetwork", "postgres", "163202", eventValidator);
+        return new EventService(eventRepository);
+    }
+
     public Service getService() {
-        return new Service(getUserService(), getFriendshipService(), getMessageService(), getPasswordService());
+        return new Service(getUserService(), getFriendshipService(), getMessageService(), getPasswordService(), getEventService());
     }
 
     public UI getUI() {

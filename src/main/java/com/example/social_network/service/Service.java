@@ -19,18 +19,21 @@ public class Service {
     private final FriendshipService friendshipService;
     private final MessageService messageService;
     private final PasswordService passwordService;
+    private final EventService eventService;
 
     /**
      * Constructor with parameters
      *
      * @param userService       - UserService
      * @param friendshipService - FriendshipService
+     * @param eventService
      */
-    public Service(UserService userService, FriendshipService friendshipService, MessageService messageService, PasswordService passwordService) {
+    public Service(UserService userService, FriendshipService friendshipService, MessageService messageService, PasswordService passwordService, EventService eventService) {
         this.userService = userService;
         this.friendshipService = friendshipService;
         this.messageService = messageService;
         this.passwordService = passwordService;
+        this.eventService = eventService;
 
         if (userService.getRepo() instanceof UserDB)
             loadData();
@@ -484,5 +487,35 @@ public class Service {
 
     public Password getPassword(Long userId) {
         return passwordService.findOne(userId);
+    }
+
+    public void subscribeToEvent(String eventName, String username) {
+        Event event = eventService.getEvent(eventName);
+        User user = userService.getUser(username);
+        List<User> subscribers = event.getSubscribers();
+        subscribers.add(user);
+        eventService.updateEvent(eventName, subscribers);
+    }
+
+    public void unsubscribeFromEvent(String eventName, String username) {
+        Event event = eventService.getEvent(eventName);
+        User user = userService.getUser(username);
+        List<User> subscribers = event.getSubscribers();
+        subscribers.remove(user);
+        eventService.updateEvent(eventName, subscribers);
+    }
+
+    public Event createEvent(String username, String name, String description, String location, String type, LocalDateTime date) {
+        User createdBy = userService.getUser(username);
+        return eventService.createEvent(createdBy, name, description, location, type, date, new ArrayList<>());
+    }
+
+    public void deleteEvent(String name) {
+        Event event = eventService.getEvent(name);
+        eventService.deleteEvent(event.getId());
+    }
+
+    public Set<Event> getEventsOnPage(int page) {
+        return eventService.getEventsOnPage(page);
     }
 }
