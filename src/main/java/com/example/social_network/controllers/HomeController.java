@@ -112,6 +112,18 @@ public class HomeController {
         pnlStatistics.setVisible(true);
     }
 
+    public void changePaneToEvents() throws IOException {
+        pnlEvents.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/allEvents.fxml"))));
+
+        pnlOverview.setVisible(false);
+        pnlMessages.setVisible(false);
+        pnlFriendRequests.setVisible(false);
+        pnlSugestions.setVisible(false);
+        pnlAllFriends.setVisible(false);
+        pnlEvents.setVisible(true);
+        pnlStatistics.setVisible(false);
+    }
+
     public void signOut(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/signIn.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

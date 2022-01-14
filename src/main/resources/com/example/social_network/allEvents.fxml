@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Pagination fx:id="pagination" layoutX="24.0" layoutY="158.0" maxPageIndicatorCount="3" prefHeight="369.0" prefWidth="746.0" stylesheets="@../../../style/eventsStyle.css" />
-      <Button layoutX="658.0" layoutY="111.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" styleClass="button_refresh" text="Refresh">
+      <Button layoutX="658.0" layoutY="111.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" styleClass="button_refresh" text="Refresh" onAction="#refresh">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                <image>

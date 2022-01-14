@@ -518,4 +518,11 @@ public class Service {
     public Set<Event> getEventsOnPage(int page) {
         return eventService.getEventsOnPage(page);
     }
+
+    public int noEvents() {
+        int count = 0;
+        for (Event event : eventService.getAllEvents())
+            count++;
+        return count;
+    }
 }

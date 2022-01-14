@@ -127,7 +127,7 @@ public class StatisticsController {
             warningMessage.setText("File Path can't be empty!");
         } else {
             String username = searchUser.getText();
-            String file = filePath.getText() + "\\" + fileName.getText() + ".pdf";
+            String file = filePath.getText() + "/" + fileName.getText() + ".pdf";
 
             PDFService pdfService = new PDFService(SignInController.service);
             try {

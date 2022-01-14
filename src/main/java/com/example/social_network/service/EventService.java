@@ -42,9 +42,13 @@ public class EventService {
     }
 
     public Set<Event> getEventsOnPage(int page) {
-        Pageable pageable = new PageableImplementation(page, 5);
+        Pageable pageable = new PageableImplementation(page, 1);
         Page<Event> eventsPage = repo.findAll(pageable);
         return eventsPage.getContent().collect(Collectors.toSet());
+    }
+
+    public Iterable<Event> getAllEvents() {
+        return repo.findAll();
     }
 
 }
