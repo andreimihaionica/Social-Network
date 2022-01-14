@@ -6,6 +6,7 @@ module com.example.social_network {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
+    requires pdfbox.app;
 
     opens com.example.social_network to javafx.fxml;
     exports com.example.social_network;
