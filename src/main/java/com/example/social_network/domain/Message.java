@@ -61,11 +61,7 @@ public class Message extends Entity<Long> {
 
     @Override
     public String toString() {
-        return "Message{" +
-                "from=" + from +
-                ", to=" + to +
-                ", date=" + date.format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss")) +
-                ", message='" + message + '\'' +
-                '}';
+        return  '\'' + message + '\'' +
+                " at " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss"));
     }
 }

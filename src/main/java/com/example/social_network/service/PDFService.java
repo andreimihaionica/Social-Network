@@ -79,48 +79,51 @@ public class PDFService {
         return messageList;
     }
 
-    public void statisticsPDF(Date date1, Date date2, String currentUsername, String username, String file) {
+    public void statisticsPDF(Date date1, Date date2, String currentUsername, String username, String file) throws IOException {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
 
         PDPageContentStream contentStream = null;
-        try {
-            contentStream = new PDPageContentStream(document, page);
-            contentStream.setLeading(15f);
-            contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
-            contentStream.beginText();
-            contentStream.newLineAtOffset(20, 750);
-            List<Tuple<User, String>> newFriends = getNewFriends(date1, date2, currentUsername);
-            contentStream.showText(newFriends.size() + " new friends");
-            contentStream.newLine();
-            for (var newFriend : newFriends) {
-                contentStream.showText(newFriend.getLeft().getUsername() + " " + newFriend.getRight());
-                contentStream.newLine();
-            }
-            contentStream.newLine();
-            contentStream.showText(noOfMessages(date1, date2, currentUsername) + " messages received");
-            contentStream.newLine();
-            contentStream.newLine();
-            List<Message> messages = getMessages(date1, date2, currentUsername, username);
-            if (messages.isEmpty()) {
-                contentStream.showText("No messages from " + username + ".");
-                contentStream.newLine();
-            }
-            contentStream.showText("Messages from " + username + ":");
-            contentStream.newLine();
-            for (Message message : messages) {
-                contentStream.showText(message.toString());
-                contentStream.newLine();
-            }
-            contentStream.endText();
-            contentStream.close();
+        contentStream = new PDPageContentStream(document, page);
+        contentStream.setLeading(15f);
+        contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 17);
+        contentStream.beginText();
+        contentStream.newLineAtOffset(20, 750);
 
-            document.save(file);
-            document.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        contentStream.showText("Statistics");
+        contentStream.newLine();
+        contentStream.newLine();
+
+        contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
+        List<Tuple<User, String>> newFriends = getNewFriends(date1, date2, currentUsername);
+        contentStream.showText(newFriends.size() + " new friends");
+        contentStream.newLine();
+        for (var newFriend : newFriends) {
+            contentStream.showText(newFriend.getLeft().getUsername() + " " + newFriend.getRight());
+            contentStream.newLine();
         }
+        contentStream.newLine();
+        contentStream.showText(noOfMessages(date1, date2, currentUsername) + " messages received");
+        contentStream.newLine();
+        contentStream.newLine();
+        List<Message> messages = getMessages(date1, date2, currentUsername, username);
+        if (messages.isEmpty()) {
+            contentStream.showText("No messages from " + username + ".");
+            contentStream.newLine();
+        }
+        contentStream.showText("Messages from " + username + ":");
+        contentStream.newLine();
+        for (Message message : messages) {
+            contentStream.showText(message.toString());
+            contentStream.newLine();
+        }
+        contentStream.endText();
+        contentStream.close();
+
+        document.save(file);
+        document.close();
+
 
     }
 

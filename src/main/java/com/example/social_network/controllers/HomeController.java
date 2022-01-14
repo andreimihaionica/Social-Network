@@ -64,6 +64,18 @@ public class HomeController {
         pnlStatistics.setVisible(false);
     }
 
+    public void changePaneToMessages() throws IOException {
+        pnlOverview.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/allConversations.fxml"))));
+
+        pnlOverview.setVisible(false);
+        pnlMessages.setVisible(true);
+        pnlFriendRequests.setVisible(false);
+        pnlSugestions.setVisible(false);
+        pnlAllFriends.setVisible(false);
+        pnlEvents.setVisible(false);
+        pnlStatistics.setVisible(false);
+    }
+
     public void changePaneToFriendRequests() throws IOException {
         pnlFriendRequests.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/friendRequests.fxml"))));
 
@@ -86,6 +98,18 @@ public class HomeController {
         pnlAllFriends.setVisible(true);
         pnlEvents.setVisible(false);
         pnlStatistics.setVisible(false);
+    }
+
+    public void changePaneToStatistics() throws IOException {
+        pnlStatistics.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/statistics.fxml"))));
+
+        pnlOverview.setVisible(false);
+        pnlMessages.setVisible(false);
+        pnlFriendRequests.setVisible(false);
+        pnlSugestions.setVisible(false);
+        pnlAllFriends.setVisible(false);
+        pnlEvents.setVisible(false);
+        pnlStatistics.setVisible(true);
     }
 
     public void signOut(ActionEvent event) throws IOException {

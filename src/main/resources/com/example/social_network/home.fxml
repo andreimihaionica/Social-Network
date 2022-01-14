@@ -66,7 +66,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnMessages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Messages">
+            <Button fx:id="btnMessages" onAction="#changePaneToMessages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Messages">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -107,7 +107,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnStatistics" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Statistics">
+            <Button fx:id="btnStatistics"  onAction="#changePaneToStatistics" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Statistics">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -138,7 +138,9 @@
             <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
             <fx:include source="overview.fxml"/>
             </Pane>
-            <Pane fx:id="pnlMessages" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="pnlMessages" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <fx:include source="allConversations.fxml"/>
+            </Pane>
 
             <Pane fx:id="pnlFriendRequests" prefHeight="554.0" prefWidth="793.0" visible="false">
             <fx:include source="friendRequests.fxml" />
@@ -150,7 +152,9 @@
             </Pane>
 
             <Pane fx:id="pnlEvents" prefHeight="200.0" prefWidth="200.0" />
-            <Pane fx:id="pnlStatistics" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="pnlStatistics" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <fx:include source="statistics.fxml"/>
+            </Pane>
          </children>
       </StackPane>
    </children>

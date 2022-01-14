@@ -11,6 +11,7 @@ public class Conversation {
     public String users;
     public String stringConversation;
     public List<Message> conversation;
+    public String date;
 
     public Conversation(List<Message> conversation, String currentUser) {
         this.conversation = conversation;
@@ -37,7 +38,8 @@ public class Conversation {
 
         Message lastMessage = conversation.get(conversation.size() - 1);
 
-         stringConversation = lastMessage.getFrom().getUsername() + " wrote " + '"' + lastMessage.getMessage() + '"' + " at " + lastMessage.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm"));
+         stringConversation = lastMessage.getFrom().getUsername() + " wrote " + '"' + lastMessage.getMessage();
+         date = lastMessage.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm"));
     }
 
     public String getUsers() {
@@ -52,6 +54,7 @@ public class Conversation {
         return conversation;
     }
 
+    public String getDate() {return date;}
     @Override
     public String toString() {
         return "Conversation{" +

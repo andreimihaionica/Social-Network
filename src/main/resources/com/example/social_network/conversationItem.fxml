@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="728.0" spacing="20.0" style="-fx-background-radius: 10; -fx-background-insets: 0;" styleClass="linear-grad" stylesheets="@../../../style/homeStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.controllers.ConversationItemController">
+   <children>
+      <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/mail.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTo" alignment="CENTER" prefHeight="20.0" prefWidth="185.0" text="Teodora, Andrei, Maria" textFill="#e4eefd">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblLastMessage" alignment="CENTER" prefHeight="20.0" prefWidth="386.0" text="Teodora wrote &quot; Salut! &quot;" textFill="#e4eefd">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDate" alignment="CENTER" prefHeight="20.0" prefWidth="183.0" text="11.12.2021 la 19:20" textFill="#e4eefd">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+   <effect>
+      <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+   </effect>
+   <padding>
+      <Insets left="10.0" right="5.0" />
+   </padding>
+</HBox>
