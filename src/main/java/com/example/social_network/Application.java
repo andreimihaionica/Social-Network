@@ -17,7 +17,7 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/signIn.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/allEvents.fxml")));
         Scene scene = new Scene(root);
 
         stage.getIcons().add(new Image("file:src/main/resources/icons/icon.png"));

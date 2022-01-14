@@ -42,7 +42,7 @@
          <graphic>
             <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../icons/newMessage.png" />
+                  <Image url="@../../../icons/addEvent.png" />
                </image>
             </ImageView>
          </graphic>

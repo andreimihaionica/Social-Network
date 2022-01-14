@@ -1,0 +1,36 @@
+.linear-grad
+{
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 10;
+}
+
+.label-white
+{
+    -fx-text-fill: #E4EEFD;
+    -fx-wrap-text: true;
+}
+
+.label-black
+{
+    -fx-text-fill: #05071F;
+}
+
+.button
+{
+        -fx-border-color:  #2A73FF;
+        -fx-border-radius: 20;
+        -fx-background-color: transparent;
+        -fx-text-fill : #E4EEFD;
+        -fx-font-size : 15px;
+    }
+
+.button:hover{
+    -fx-background-color : #431FA0;
+    -fx-background-radius: 20;
+}
+
+.button:pressed
+{
+    -fx-background-color : #05071F;
+    -fx-background-radius: 20;
+}
