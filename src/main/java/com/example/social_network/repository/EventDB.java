@@ -11,6 +11,7 @@ import com.example.social_network.repository.paging.PagingRepository;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EventDB implements PagingRepository<Long, Event> {
 
@@ -37,11 +38,21 @@ public class EventDB implements PagingRepository<Long, Event> {
         return null;
     }
 
+    class Sortbyroll implements Comparator<Event>
+    {
+        // Used for sorting in ascending order of
+        // roll number
+        public int compare(Event a, Event b)
+        {
+            return (int) (a.getId() - b.getId());
+        }
+    }
+
     @Override
     public Iterable<Event> findAll() {
         Set<Event> events = new HashSet<>();
         try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement statement = connection.prepareStatement("SELECT * from \"Events\"");
+             PreparedStatement statement = connection.prepareStatement("SELECT * from \"Events\" ORDER BY id");
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -85,9 +96,18 @@ public class EventDB implements PagingRepository<Long, Event> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return events;
     }
 
+    public ArrayList<Event> findAllArrayList() {
+        Set<Event> events = new HashSet<>((Collection<? extends Event>) findAll());
+
+        ArrayList<Event> list = new ArrayList<>(events);
+        list.sort(new Sortbyroll());
+
+        return list;
+    }
     @Override
     public Event save(Event entity) {
         validator.validate(entity);
@@ -157,7 +177,7 @@ public class EventDB implements PagingRepository<Long, Event> {
 
     @Override
     public Page<Event> findAll(Pageable pageable) {
-        Paginator<Event> paginator = new Paginator<>(pageable, this.findAll());
+        Paginator<Event> paginator = new Paginator<>(pageable, this.findAllArrayList());
         return paginator.paginate();
     }
 }

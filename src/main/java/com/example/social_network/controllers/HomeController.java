@@ -113,7 +113,7 @@ public class HomeController {
     }
 
     public void changePaneToEvents() throws IOException {
-        pnlEvents.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/allEvents.fxml"))));
+        pnlEvents.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/events.fxml"))));
 
         pnlOverview.setVisible(false);
         pnlMessages.setVisible(false);

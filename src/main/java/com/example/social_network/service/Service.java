@@ -4,6 +4,7 @@ import com.example.social_network.domain.*;
 import com.example.social_network.repository.UserDB;
 import com.example.social_network.util.Graph;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -521,7 +522,7 @@ public class Service {
 
     public int noEvents() {
         int count = 0;
-        for (Event event : eventService.getAllEvents())
+        for (Event ignored : eventService.getAllEvents())
             count++;
         return count;
     }

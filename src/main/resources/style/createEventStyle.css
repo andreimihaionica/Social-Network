@@ -1,0 +1,64 @@
+.label_Statistics {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 20;
+    -fx-text-fill: #E4EEFD;
+}
+
+
+.button_generate {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 20;
+    -fx-text-fill: #E4EEFD;
+    -fx-font-size: 17px;
+}
+
+.button_generate:hover {
+    -fx-background-color: #431FA0;
+    -fx-background-radius: 20;
+}
+
+.button_generate:pressed {
+    -fx-background-color: #05071F;
+    -fx-background-radius: 20;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #431FA0;
+    -fx-background-radius: 0;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #E4EEFD;
+}
+
+.text-field {
+    -fx-background-color: #431FA0;
+    -fx-text-fill: #E4EEFD;
+    -fx-font-size: 15px;
+}
+
+.text-field:hover {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+}
+
+.text-area {
+    -fx-background-color: #431FA0;
+    -fx-text-fill: #E4EEFD;
+    -fx-font-size: 15px;
+    -fx-wrap-text: true;
+}
+
+.text-area .content {
+    -fx-background-color: #431FA0;
+    -fx-text-fill: #E4EEFD;
+    -fx-font-size: 15px;
+    -fx-wrap-text: true;
+}
+
+.text-area .content:hover {
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+}

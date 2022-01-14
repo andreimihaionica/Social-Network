@@ -77,4 +77,17 @@ public class Event extends Entity<Long> {
     public void setSubscribers(List<User> subscribers) {
         this.subscribers = subscribers;
     }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "createdBy=" + createdBy +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", type='" + type + '\'' +
+                ", date=" + date +
+                ", subscribers=" + subscribers +
+                '}';
+    }
 }

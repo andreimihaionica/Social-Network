@@ -170,7 +170,7 @@
                 </Pane>
 
                 <Pane fx:id="pnlEvents" prefHeight="200.0" prefWidth="200.0">
-                    <fx:include source="allEvents.fxml"/>
+                    <fx:include source="events.fxml"/>
                 </Pane>
                 <Pane fx:id="pnlStatistics" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <fx:include source="statistics.fxml"/>
