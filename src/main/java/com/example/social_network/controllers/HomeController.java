@@ -66,7 +66,7 @@ public class HomeController {
     }
 
     public void changePaneToMessages() throws IOException {
-        pnlOverview.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/allConversations.fxml"))));
+        pnlOverview.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/social_network/messages.fxml"))));
 
         pnlOverview.setVisible(false);
         pnlMessages.setVisible(true);

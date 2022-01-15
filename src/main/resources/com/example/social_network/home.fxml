@@ -157,7 +157,7 @@
                     <fx:include source="overview.fxml"/>
                 </Pane>
                 <Pane fx:id="pnlMessages" prefHeight="200.0" prefWidth="200.0" visible="false">
-                    <fx:include source="allConversations.fxml"/>
+                    <fx:include source="messages.fxml"/>
                 </Pane>
 
                 <Pane fx:id="pnlFriendRequests" prefHeight="554.0" prefWidth="793.0" visible="false">

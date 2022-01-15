@@ -43,7 +43,9 @@ public class OverviewController {
 
         for (User user : users) {
             try {
-                if (!Objects.equals(SignInController.currentUser, user.getUsername()) && getFriendship(SignInController.currentUser, user.getUsername(), users, friendships) == null) {
+                if (!Objects.equals(SignInController.currentUser, user.getUsername()) &&
+                        getFriendship(SignInController.currentUser, user.getUsername(), users, friendships) == null &&
+                        !Objects.equals(user.getUsername(), "Notification")) {
                     suggestedUserItems.getChildren().add(getNode(user.getUsername(), false));
 
                     noSuggestions--;

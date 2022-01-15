@@ -1,0 +1,63 @@
+.button1
+{
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 20;
+    -fx-text-fill : #E4EEFD;
+    -fx-font-size : 15px;
+}
+
+.button1:hover{
+    -fx-background-color : #431FA0;
+    -fx-background-radius: 20;
+}
+
+.button1:pressed
+{
+    -fx-background-color : #05071F;
+    -fx-background-radius: 20;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane
+{
+    -fx-background-color: white;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical
+{
+    -fx-background-color:transparent;
+}
+
+.scroll-bar:horizontal
+{
+    -fx-opacity: 0;
+}
+
+.increment-button, .decrement-button
+{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track
+{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb
+{
+    -fx-background-color: linear-gradient(to bottom left, #05071F, #431FA0);
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner
+{
+    -fx-background-color: white;
+}

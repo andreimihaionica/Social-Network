@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="messageItem" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="660.0" styleClass="linear-grad" stylesheets="@../../../style/messageItemStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.controllers.MessageItemController">
+   <children>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icons/userIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblToFrom" layoutX="64.0" layoutY="15.0" prefHeight="20.0" prefWidth="431.0" text="andrei to teodora, maria" textFill="#e4eefd">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMessage" layoutX="64.0" layoutY="35.0" prefHeight="19.0" prefWidth="431.0" text="Buna ziua!" textFill="#e4eefd">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDate" alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="25.0" prefHeight="20.0" prefWidth="158.0" text="16.03.2022 23:45" textFill="#e4eefd">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

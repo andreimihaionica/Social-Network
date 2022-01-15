@@ -4,8 +4,6 @@ import com.example.social_network.domain.*;
 import com.example.social_network.repository.UserDB;
 import com.example.social_network.util.Graph;
 
-import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -540,13 +538,11 @@ public class Service {
         LocalDateTime now = LocalDateTime.now();
         Iterable<Message> messages = getAllMessages();
         for (Event event : events) {
-            Long days = ChronoUnit.DAYS.between(now, event.getDate());
-            System.out.println(days);
+            Long days = ChronoUnit.DAYS.between(now, event.getDate()) + 1;
             if (event.getSubscribers().contains(user) && (days == 7 || days == 2 || days == 1)) {
                 boolean received = false;
                 for (Message message : messages) {
                     Long hours = ChronoUnit.HOURS.between(now, message.getDate());
-                    System.out.println(hours);
                     if (Objects.equals(message.getFrom().getId(), getUser("Notification").getId()) && message.getTo().contains(getUser(currentUser)) && hours < 24 && message.getMessage().contains(event.getName())) {
                         received = true;
                     }

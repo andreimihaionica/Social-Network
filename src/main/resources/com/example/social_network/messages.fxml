@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.social_network.controllers.AllConversationsController">
+   <children>
+      <Pane fx:id="pnlAllConversations" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: white;" stylesheets="@../../../style/friendRequestsStyle.css" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="76.0" prefHeight="35.0" prefWidth="239.0" styleClass="label_friendRequests" text="Conversations" textFill="#05071f">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="24.0" layoutY="158.0" prefHeight="382.0" prefWidth="746.0" style="-fx-background-color: white;">
+               <content>
+                  <VBox fx:id="conversationItems" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: white;">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Button layoutX="658.0" layoutY="113.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="112.0" styleClass="button_refresh" text="Refresh">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../icons/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="602.0" layoutY="80.0" mnemonicParsing="false" onAction="#changePnlSendNewMessage" prefHeight="27.0" prefWidth="168.0" styleClass="button_refresh" text="Send new message">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../icons/addEvent.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="pnlSendNewMessage" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: white;" stylesheets="@../../../style/createEventStyle.css" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="76.0" prefHeight="35.0" prefWidth="239.0" styleClass="label_Statistics" text="Send New Message" textFill="#05071f">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER_LEFT" layoutX="39.0" layoutY="145.0" prefHeight="377.0" prefWidth="715.0" spacing="12.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="450.0" spacing="15.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="tfTo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" styleClass="text-field1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="600.0" spacing="15.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Message">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="taMessage" prefHeight="120.0" prefWidth="350.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="715.0">
+                     <children>
+                        <Button fx:id="btnSendMessage" mnemonicParsing="false" onAction="#sendNewMessage" styleClass="button_generate" text="Send">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/paperPlane.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="27.0" prefWidth="715.0">
+                     <children>
+                        <Label fx:id="warningMessage" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="400.0" textAlignment="CENTER" textFill="RED" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button layoutX="668.0" layoutY="80.0" mnemonicParsing="false" onAction="#changePnlAllConversations" prefHeight="27.0" prefWidth="86.0" styleClass="button_refresh" stylesheets="@../../../style/friendRequestsStyle.css" text="Back">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../icons/backTo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="pnlSeeMessage" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: white;">
+         <children>
+            <ScrollPane layoutX="30.0" layoutY="71.0" prefHeight="316.0" prefWidth="733.0" stylesheets="@../../../style/messageStyle.css">
+               <content>
+                  <VBox fx:id="messages" alignment="TOP_CENTER" prefHeight="311.0" prefWidth="726.0" spacing="10.0" />
+               </content>
+            </ScrollPane>
+            <HBox alignment="CENTER" layoutX="30.0" layoutY="390.0" prefHeight="55.0" prefWidth="733.0" spacing="20.0">
+               <children>
+                  <Button fx:id="reply" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../../style/messageStyle.css" text="Reply" />
+                  <Button fx:id="replyall" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../../style/messageStyle.css" text="Reply All" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbox" alignment="CENTER" layoutX="38.0" layoutY="438.0" prefHeight="100.0" prefWidth="733.0" spacing="20.0" visible="false">
+               <children>
+                  <TextArea fx:id="textArea" prefHeight="100.0" prefWidth="602.0" />
+                  <Button fx:id="btnSend" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="button1" stylesheets="@../../../style/messageStyle.css" text="Send">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/paperPlane.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <Button layoutX="677.0" layoutY="27.0" mnemonicParsing="false" onAction="#changePnlAllConversations" prefHeight="27.0" prefWidth="86.0" styleClass="button_refresh" stylesheets="@../../../style/friendRequestsStyle.css" text="Back">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../icons/backTo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</StackPane>

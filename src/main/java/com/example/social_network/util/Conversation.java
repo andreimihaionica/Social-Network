@@ -38,7 +38,7 @@ public class Conversation {
 
         Message lastMessage = conversation.get(conversation.size() - 1);
 
-         stringConversation = lastMessage.getFrom().getUsername() + " wrote " + '"' + lastMessage.getMessage();
+         stringConversation = lastMessage.getFrom().getUsername() + " wrote " + '"' + lastMessage.getMessage() + '"';
          date = lastMessage.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm"));
     }
 
