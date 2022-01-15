@@ -239,7 +239,7 @@ public class UIadmin implements InterfaceUI{
         try {
             List<String> friends = service.getAllFriendsForUserByMonth(name, month);
             if (friends.isEmpty())
-                out.println(name + " did not make any friends in month " + String.valueOf(month) + "! :( ");
+                out.println(name + " did not make any friends in month " + month + "! :( ");
             else
                 friends.forEach(out::println);
         } catch (IllegalArgumentException exception) {

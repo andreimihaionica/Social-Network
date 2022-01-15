@@ -12,7 +12,7 @@ public class PasswordDB implements Repository<Long, Password> {
     private final String url;
     private final String username;
     private final String password;
-    private final Validator<Password> validator;
+    Validator<Password> validator;
 
     public PasswordDB(String url, String username, String password, Validator<Password> validator) {
         this.url = url;

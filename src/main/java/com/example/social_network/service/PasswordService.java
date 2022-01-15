@@ -4,7 +4,7 @@ import com.example.social_network.domain.Password;
 import com.example.social_network.repository.Repository;
 
 public class PasswordService {
-    private final Repository<Long, Password> repo;
+    Repository<Long, Password> repo;
 
     public PasswordService(Repository<Long, Password> repo) {
         this.repo = repo;

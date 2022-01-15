@@ -4,12 +4,14 @@ import com.example.social_network.domain.Entity;
 
 /**
  * Interface of repository
+ *
  * @param <ID> -
- * @param <E> -
+ * @param <E>  -
  */
 public interface Repository<ID, E extends Entity<ID>> {
     /**
      * Find entity by id
+     *
      * @param id of entity
      * @return entity with id = id
      */
@@ -17,12 +19,14 @@ public interface Repository<ID, E extends Entity<ID>> {
 
     /**
      * Find all entities
+     *
      * @return all entities values
      */
     Iterable<E> findAll();
 
     /**
      * Save entity in repository
+     *
      * @param entity - entity to be saved
      * @return - entity
      */
@@ -30,6 +34,7 @@ public interface Repository<ID, E extends Entity<ID>> {
 
     /**
      * Delete entity from repository
+     *
      * @param id - id of entity
      * @return entity
      */
@@ -37,6 +42,7 @@ public interface Repository<ID, E extends Entity<ID>> {
 
     /**
      * Update entity in repository
+     *
      * @param entity - entity to update
      * @return entity
      */

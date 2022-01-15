@@ -1,9 +1,10 @@
 package com.example.social_network.repository.paging;
+
 import java.util.stream.Stream;
 
 public class PageImplementation<T> implements Page<T> {
-    private Pageable pageable;
-    private Stream<T> content;
+    private final Pageable pageable;
+    private final Stream<T> content;
 
     PageImplementation(Pageable pageable, Stream<T> content) {
         this.pageable = pageable;
@@ -13,11 +14,6 @@ public class PageImplementation<T> implements Page<T> {
     @Override
     public Pageable getPageable() {
         return this.pageable;
-    }
-
-    @Override
-    public Pageable nextPageable() {
-        return new PageableImplementation(this.pageable.getPageNumber() + 1, this.pageable.getPageSize());
     }
 
     @Override

@@ -7,11 +7,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class UI implements InterfaceUI {
-    private final Service service;
     private final Scanner in;
     private final PrintStream out;
-    private UIadmin uiAdmin;
-    private UIuser uiUser;
+    private final UIadmin uiAdmin;
+    private final UIuser uiUser;
 
     /**
      * Constructor with parameters
@@ -21,7 +20,6 @@ public class UI implements InterfaceUI {
      * @param out     - PrintStream
      */
     public UI(Service service, InputStream in, PrintStream out) {
-        this.service = service;
         this.in = new Scanner(in);
         this.out = out;
         uiAdmin = new UIadmin(service, in, out);

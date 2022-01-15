@@ -11,14 +11,13 @@ import com.example.social_network.repository.paging.PagingRepository;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class EventDB implements PagingRepository<Long, Event> {
 
     private final String url;
     private final String username;
     private final String password;
-    private final Validator<Event> validator;
+    Validator<Event> validator;
 
     public EventDB(String url, String username, String password, Validator<Event> validator) {
         this.url = url;
@@ -38,12 +37,8 @@ public class EventDB implements PagingRepository<Long, Event> {
         return null;
     }
 
-    class Sortbyroll implements Comparator<Event>
-    {
-        // Used for sorting in ascending order of
-        // roll number
-        public int compare(Event a, Event b)
-        {
+    static class Sort implements Comparator<Event> {
+        public int compare(Event a, Event b) {
             return (int) (a.getId() - b.getId());
         }
     }
@@ -104,10 +99,11 @@ public class EventDB implements PagingRepository<Long, Event> {
         Set<Event> events = new HashSet<>((Collection<? extends Event>) findAll());
 
         ArrayList<Event> list = new ArrayList<>(events);
-        list.sort(new Sortbyroll());
+        list.sort(new Sort());
 
         return list;
     }
+
     @Override
     public Event save(Event entity) {
         validator.validate(entity);

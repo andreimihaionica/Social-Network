@@ -22,8 +22,4 @@ public class ConversationItemController {
         lblDate.setText(date);
         this.conversation = conversation;
     }
-
-    public void seeMessage() {
-
-    }
 }

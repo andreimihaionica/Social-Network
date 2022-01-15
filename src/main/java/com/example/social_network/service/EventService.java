@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EventService {
-    private PagingRepository<Long, Event> repo;
+    PagingRepository<Long, Event> repo;
 
     public EventService(PagingRepository<Long, Event> repo) {
         this.repo = repo;

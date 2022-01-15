@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FriendshipService {
-    private PagingRepository<Tuple<Long, Long>, Friendship> repo;
+    PagingRepository<Tuple<Long, Long>, Friendship> repo;
 
     /**
      * Constructor with parameters
@@ -28,12 +28,13 @@ public class FriendshipService {
     /**
      * Add friendship in repository
      *
-     * @param utilizator1 - ID of User1
-     * @param utilizator2 - ID of User2
+     * @param user1 - ID of User1
+     * @param user2 - ID of User2
      */
-    public void addFriendship(Long utilizator1, Long utilizator2) {
+    public void addFriendship(Long user1, Long user2) {
         Friendship friendship = new Friendship(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), FriendshipStatus.PENDING);
-        friendship.setId(new Tuple(utilizator1, utilizator2));
+        Tuple<Long, Long> tuple = new Tuple<>(user1, user2);
+        friendship.setId(tuple);
 
         repo.save(friendship);
     }

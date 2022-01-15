@@ -34,8 +34,4 @@ public class SuggestedUserItemController {
     public ImageView getIconBtn() {
         return iconBtn;
     }
-
-    public void setIconBtn(ImageView imageView) {
-        iconBtn = imageView;
-    }
 }

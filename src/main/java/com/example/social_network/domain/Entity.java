@@ -5,9 +5,10 @@ import java.io.Serializable;
 
 /**
  * Entity Class
+ *
  * @param <ID> -
  */
-public class Entity <ID> implements Serializable {
+public class Entity<ID> implements Serializable {
     @Serial
     private static final long serialVersionUID = 7331115341259248461L;
     /**
@@ -17,6 +18,7 @@ public class Entity <ID> implements Serializable {
 
     /**
      * Get the ID for an entity
+     *
      * @return ID of entity
      */
     public ID getId() {
@@ -25,6 +27,7 @@ public class Entity <ID> implements Serializable {
 
     /**
      * Sets the ID for an entity
+     *
      * @param id - new id
      */
     public void setId(ID id) {

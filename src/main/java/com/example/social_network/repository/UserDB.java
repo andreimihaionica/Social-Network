@@ -13,8 +13,10 @@ import java.util.Objects;
 import java.util.Set;
 
 public class UserDB implements PagingRepository<Long, User> {
-    private String url, username, password;
-    private Validator<User> validator;
+    private final String url;
+    private final String username;
+    private final String password;
+    Validator<User> validator;
 
     public UserDB(String url, String username, String password, Validator<User> validator) {
         this.url = url;

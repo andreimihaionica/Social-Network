@@ -33,13 +33,13 @@ public class Conversation {
             users = users.substring(0, users.length() - 2);
         }
 
-        if(users.contains(","))
+        if (users.contains(","))
             users = users + ", " + currentUser;
 
         Message lastMessage = conversation.get(conversation.size() - 1);
 
-         stringConversation = lastMessage.getFrom().getUsername() + " wrote " + '"' + lastMessage.getMessage() + '"';
-         date = lastMessage.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm"));
+        stringConversation = lastMessage.getFrom().getUsername() + " wrote " + '"' + lastMessage.getMessage() + '"';
+        date = lastMessage.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm"));
     }
 
     public String getUsers() {
@@ -54,7 +54,10 @@ public class Conversation {
         return conversation;
     }
 
-    public String getDate() {return date;}
+    public String getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
         return "Conversation{" +

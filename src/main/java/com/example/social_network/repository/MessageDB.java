@@ -13,8 +13,10 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class MessageDB implements PagingRepository<Long, Message> {
-    private String url, username, password;
-    private Validator<Message> validator;
+    private final String url;
+    private final String username;
+    private final String password;
+    Validator<Message> validator;
 
     public MessageDB(String url, String username, String password, Validator<Message> validator) {
         this.url = url;
@@ -89,7 +91,7 @@ public class MessageDB implements PagingRepository<Long, Message> {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, entity.getFrom().getUsername());
-            String list = entity.getTo().stream().map(x -> x.getUsername()).reduce((x, y) -> (x + ";" + y)).get();
+            String list = entity.getTo().stream().map(User::getUsername).reduce((x, y) -> (x + ";" + y)).get();
             ps.setString(2, list);
             ps.setString(3, entity.getMessage());
             ps.setTimestamp(4, Timestamp.valueOf(entity.getDate()));
@@ -107,7 +109,7 @@ public class MessageDB implements PagingRepository<Long, Message> {
 
     @Override
     public Message delete(Long id) {
-        if(findOne(id) == null)
+        if (findOne(id) == null)
             throw new IllegalArgumentException("Message does not exist!");
 
         String sql = "delete from \"Messages\" where id=(?)";

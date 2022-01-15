@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Event extends Entity<Long> {
-    private User createdBy;
+    private final User createdBy;
     private String name;
-    private String description;
-    private String location;
+    private final String description;
+    private final String location;
     private String type;
     private LocalDateTime date;
     private List<User> subscribers;
@@ -26,10 +26,6 @@ public class Event extends Entity<Long> {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public String getName() {
         return name;
     }
@@ -42,16 +38,8 @@ public class Event extends Entity<Long> {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getLocation() {
         return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public String getType() {

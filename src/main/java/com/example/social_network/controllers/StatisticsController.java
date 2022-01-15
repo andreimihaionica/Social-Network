@@ -53,13 +53,13 @@ public class StatisticsController {
     public void showData() {
         warningMessage.setText("");
 
-        if(startDate.getValue() == null) {
+        if (startDate.getValue() == null) {
             warningMessage.setText("Start Date can't be empty!");
-        } else if(endDate.getValue() == null) {
+        } else if (endDate.getValue() == null) {
             warningMessage.setText("End Date can't be empty!");
-        } else if(searchUser.getText() == null) {
+        } else if (searchUser.getText() == null) {
             warningMessage.setText("User can't be empty!");
-        } else if(SignInController.service.getUser(searchUser.getText()) == null) {
+        } else if (SignInController.service.getUser(searchUser.getText()) == null) {
             warningMessage.setText("User does not exist!");
         } else {
             String username = searchUser.getText();
@@ -79,7 +79,7 @@ public class StatisticsController {
             vbox.getChildren().add(getHBox(string, true));
 
             List<Message> messagesList = pdfService.getMessages(getDate(startDate), getDate(endDate), SignInController.currentUser, username);
-            for(Message message:messagesList) {
+            for (Message message : messagesList) {
                 string = message.toString();
                 vbox.getChildren().add(getHBox(string, false));
             }
@@ -96,7 +96,7 @@ public class StatisticsController {
         Label label = new Label(string);
         label.setFont(new Font("Verdana ", 15));
 
-        if(circleOn) {
+        if (circleOn) {
             Circle circle = new Circle();
             circle.setRadius(3);
             circle.setStyle("-fx-fill: #05071F");
@@ -113,17 +113,17 @@ public class StatisticsController {
         warningMessage.setText("");
         warningMessage.setTextFill(Color.RED);
 
-        if(startDate.getValue() == null) {
+        if (startDate.getValue() == null) {
             warningMessage.setText("Start Date can't be empty!");
-        } else if(endDate.getValue() == null) {
+        } else if (endDate.getValue() == null) {
             warningMessage.setText("End Date can't be empty!");
-        } else if(searchUser.getText() == null) {
+        } else if (searchUser.getText() == null) {
             warningMessage.setText("User can't be empty!");
-        } else if(SignInController.service.getUser(searchUser.getText()) == null) {
+        } else if (SignInController.service.getUser(searchUser.getText()) == null) {
             warningMessage.setText("User does not exist!");
-        } else if(fileName.getText() == null) {
+        } else if (fileName.getText() == null) {
             warningMessage.setText("File Name can't be empty!");
-        } else if(filePath.getText() == null) {
+        } else if (filePath.getText() == null) {
             warningMessage.setText("File Path can't be empty!");
         } else {
             String username = searchUser.getText();

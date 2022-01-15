@@ -20,6 +20,7 @@ public class User extends Entity<Long> {
 
     /**
      * Constructor with parameters
+     *
      * @param username - username of User
      */
     public User(String username) {
@@ -29,6 +30,7 @@ public class User extends Entity<Long> {
 
     /**
      * Sets the username for User
+     *
      * @param username - new username
      */
     public void setUsername(String username) {
@@ -37,6 +39,7 @@ public class User extends Entity<Long> {
 
     /**
      * Get the username for User
+     *
      * @return username of User
      */
     public String getUsername() {
@@ -45,6 +48,7 @@ public class User extends Entity<Long> {
 
     /**
      * Get the friends for User
+     *
      * @return list of User
      */
     public List<User> getFriends() {
@@ -53,19 +57,17 @@ public class User extends Entity<Long> {
 
     /**
      * Override toString() for User
+     *
      * @return String
      */
     @Override
     public String toString() {
-        StringBuilder friendsUsername = new StringBuilder();
-        for(User friend : friends)
-            friendsUsername.append(friend.getUsername()).append("; ");
-
         return username;
     }
 
     /**
      * Override equals(Object o) for User
+     *
      * @param o - object to be compared
      * @return true - if Object o equals to User | false otherwise
      */
@@ -78,6 +80,7 @@ public class User extends Entity<Long> {
 
     /**
      * Override hashCode() for User
+     *
      * @return hash code for User
      */
     @Override

@@ -10,7 +10,6 @@ import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,19 +46,19 @@ public class PDFService {
 
     public Integer noOfMessages(Date date1, Date date2, String username) {
         Iterable<Message> messages = service.getAllMessages();
-        Integer contor = 0;
+        Integer count = 0;
         for (Message message : messages) {
             Date date = Date.from(message.getDate().atZone(ZoneId.systemDefault()).toInstant());
             if (date.after(date1) && date.before(date2)) {
                 for (User user : message.getTo()) {
                     if (Objects.equals(user.getUsername(), username)) {
-                        contor++;
+                        count++;
                         break;
                     }
                 }
             }
         }
-        return contor;
+        return count;
     }
 
     public List<Message> getMessages(Date date1, Date date2, String currentUsername, String username) {
@@ -84,7 +83,7 @@ public class PDFService {
         PDPage page = new PDPage();
         document.addPage(page);
 
-        PDPageContentStream contentStream = null;
+        PDPageContentStream contentStream;
         contentStream = new PDPageContentStream(document, page);
         contentStream.setLeading(15f);
         contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 17);

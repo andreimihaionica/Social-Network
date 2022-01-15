@@ -27,7 +27,6 @@ public class SignInController {
 
     private static final Factory factory = new Factory();
     public static Service service = factory.getService();
-
     public static String currentUser;
 
     @FXML

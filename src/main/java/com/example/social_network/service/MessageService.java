@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MessageService {
-    private PagingRepository<Long, Message> repo;
+    PagingRepository<Long, Message> repo;
 
     /**
      * Constructor with parameters

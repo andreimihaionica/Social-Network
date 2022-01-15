@@ -16,7 +16,9 @@ import java.util.Set;
 import static com.example.social_network.domain.FriendshipStatus.*;
 
 public class FriendshipDB implements PagingRepository<Tuple<Long, Long>, Friendship> {
-    private String url, username, password;
+    private final String url;
+    private final String username;
+    private final String password;
     Validator<Friendship> validator;
 
     public FriendshipDB(String url, String username, String password, Validator<Friendship> validator) {
@@ -37,7 +39,8 @@ public class FriendshipDB implements PagingRepository<Tuple<Long, Long>, Friends
             ps.setLong(1, id.getLeft());
             ps.setLong(2, id.getRight());
             ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()) {
+            while(resultSet.next()) {
+
                 String date = resultSet.getString("date");
                 String status = resultSet.getString("status");
 
@@ -71,9 +74,9 @@ public class FriendshipDB implements PagingRepository<Tuple<Long, Long>, Friends
                 String date = resultSet.getString("date");
                 String status = resultSet.getString("status");
                 FriendshipStatus friendshipStatus;
-                if (status.toUpperCase().equals("APPROVED"))
+                if (status.equalsIgnoreCase("APPROVED"))
                     friendshipStatus = APPROVED;
-                else if (status.toUpperCase().equals("REJECTED"))
+                else if (status.equalsIgnoreCase("REJECTED"))
                     friendshipStatus = REJECTED;
                 else
                     friendshipStatus = PENDING;
@@ -92,12 +95,12 @@ public class FriendshipDB implements PagingRepository<Tuple<Long, Long>, Friends
     @Override
     public Friendship save(Friendship entity) {
         Tuple<Long, Long> id = new Tuple<>(entity.getId().getLeft(), entity.getId().getRight());
-        if(findOne(id) != null)
+        if (findOne(id) != null)
             throw new IllegalArgumentException("Friendship already exists!");
 
         id.setLeft(entity.getId().getRight());
         id.setRight(entity.getId().getLeft());
-        if(findOne(id) != null)
+        if (findOne(id) != null)
             throw new IllegalArgumentException("Friendship already exists!");
 
         String sql = "insert into \"Friendships\" (id1, id2, date, status) values (?, ?, ?, ?)";
@@ -118,7 +121,7 @@ public class FriendshipDB implements PagingRepository<Tuple<Long, Long>, Friends
 
     @Override
     public Friendship delete(Tuple<Long, Long> id) {
-        if(findOne(id) == null)
+        if (findOne(id) == null)
             throw new IllegalArgumentException("Friendship does not exist!");
 
         String sql = "delete from \"Friendships\" where id1=(?) and id2=(?)";
@@ -137,8 +140,8 @@ public class FriendshipDB implements PagingRepository<Tuple<Long, Long>, Friends
 
     @Override
     public Friendship update(Tuple<Long, Long> id, Friendship entity) {
-        if(findOne(id) == null)
-            throw new IllegalArgumentException ("Friendship does not exist!");
+        if (findOne(id) == null)
+            throw new IllegalArgumentException("Friendship does not exist!");
 
         validator.validate(entity);
 

@@ -62,7 +62,7 @@ public class FriendRequestsController {
             }
         }
 
-        if(friendRequestItems.getChildren().size() == 0) {
+        if (friendRequestItems.getChildren().size() == 0) {
             HBox hbox = new HBox();
             hbox.setPrefWidth(744);
             hbox.setPrefHeight(350);

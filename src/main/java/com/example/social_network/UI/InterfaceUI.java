@@ -7,5 +7,5 @@ public interface InterfaceUI {
     /**
      * Run menu
      */
-    public void runMenu();
+    void runMenu();
 }

@@ -1,6 +1,6 @@
 package com.example.social_network.controllers;
 
-import com.example.social_network.domain.Event;
+import  com.example.social_network.domain.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

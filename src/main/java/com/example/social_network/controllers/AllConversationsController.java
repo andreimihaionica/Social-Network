@@ -118,9 +118,7 @@ public class AllConversationsController {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/social_network/conversationItem.fxml"));
                     node = fxmlLoader.load();
 
-                    node.setOnMouseClicked(e -> {
-                        seeMessage(conversation);
-                    });
+                    node.setOnMouseClicked(e -> seeMessage(conversation));
 
                     controller = fxmlLoader.getController();
                     controller.initialize(conversation.getUsers(), conversation.getStringConversation(), conversation.getDate(), conversation);
@@ -191,8 +189,6 @@ public class AllConversationsController {
     }
 
     public void seeMessage(Conversation conversation) {
-        System.out.println(conversation);
-
         messages.getChildren().clear();
         Node node;
         for (Message message : conversation.getConversation()) {
@@ -204,7 +200,7 @@ public class AllConversationsController {
 
                 StringBuilder toFrom = new StringBuilder(message.getFrom().getUsername());
                 toFrom.append(" to ");
-                for(User user:message.getTo())
+                for (User user : message.getTo())
                     toFrom.append(user.getUsername()).append(", ");
                 toFrom = new StringBuilder(toFrom.substring(0, toFrom.length() - 2));
 
@@ -232,7 +228,6 @@ public class AllConversationsController {
         isDisableReply = false;
         isDisableReplyAll = false;
 
-        System.out.println(lastMessage);
         if (Objects.equals(lastMessage.getFrom().getUsername(), SignInController.currentUser) || Objects.equals(lastMessage.getFrom().getUsername(), "Notification")) {
             reply.setDisable(true);
             replyall.setDisable(true);
@@ -246,17 +241,9 @@ public class AllConversationsController {
             isDisableReplyAll = true;
         }
 
-        btnSend.setOnAction(e -> {
-            send(conversation);
-        });
-
-        reply.setOnAction(e -> {
-            reply();
-        });
-
-        replyall.setOnAction(e -> {
-            replyAll();
-        });
+        btnSend.setOnAction(e -> send(conversation));
+        reply.setOnAction(e -> reply());
+        replyall.setOnAction(e -> replyAll());
 
         pnlAllConversations.setVisible(false);
         pnlSendNewMessage.setVisible(false);
@@ -285,14 +272,14 @@ public class AllConversationsController {
         if (!textArea.getText().isEmpty() && textArea.getText() != null) {
             Message lastMessage = conversation.getConversation().get(conversation.getConversation().size() - 1);
             if (replyAll) {
-                String to = "";
+                StringBuilder to = new StringBuilder();
                 for (User user : lastMessage.getTo())
                     if (!Objects.equals(user.getUsername(), SignInController.currentUser)) {
-                        to = to + user.getUsername() + ";";
+                        to.append(user.getUsername()).append(";");
                     }
-                to = to + lastMessage.getFrom().getUsername();
+                to.append(lastMessage.getFrom().getUsername());
 
-                Message message = SignInController.service.sendMessage(SignInController.currentUser, to, textArea.getText(), lastMessage.getId());
+                Message message = SignInController.service.sendMessage(SignInController.currentUser, to.toString(), textArea.getText(), lastMessage.getId());
                 hbox.setVisible(false);
                 conversation.getConversation().add(message);
             } else {

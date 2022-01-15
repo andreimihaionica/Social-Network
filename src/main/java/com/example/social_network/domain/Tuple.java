@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * Tuple class
+ *
  * @param <E1> - entity
  * @param <E2> - entity
  */
@@ -13,6 +14,7 @@ public class Tuple<E1, E2> {
 
     /**
      * Constructor with parameters
+     *
      * @param e1 entity 1
      * @param e2 entity 2
      */
@@ -23,6 +25,7 @@ public class Tuple<E1, E2> {
 
     /**
      * Get left entity for a Tuple
+     *
      * @return entity 1
      */
     public E1 getLeft() {
@@ -31,6 +34,7 @@ public class Tuple<E1, E2> {
 
     /**
      * Sets left entity for a Tuple
+     *
      * @param e1 - new entity
      */
     public void setLeft(E1 e1) {
@@ -39,6 +43,7 @@ public class Tuple<E1, E2> {
 
     /**
      * Get right entity for a Tuple
+     *
      * @return entity 2
      */
     public E2 getRight() {
@@ -47,6 +52,7 @@ public class Tuple<E1, E2> {
 
     /**
      * Sets right entity for a Tuple
+     *
      * @param e2 - new entity
      */
     public void setRight(E2 e2) {
@@ -55,6 +61,7 @@ public class Tuple<E1, E2> {
 
     /**
      * Override toString() for Tuple
+     *
      * @return String
      */
     @Override
@@ -64,16 +71,21 @@ public class Tuple<E1, E2> {
 
     /**
      * Override equals(Object obj) for Tuple
-     * @param obj - object to be compared
+     *
+     * @param o - object to be compared
      * @return true - if Object o equals to User | false otherwise
      */
     @Override
-    public boolean equals(Object obj) {
-        return this.e1.equals(((Tuple) obj).e1) && this.e2.equals(((Tuple) obj).e2);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tuple<?, ?> tuple = (Tuple<?, ?>) o;
+        return e1.equals(tuple.e1) && e2.equals(tuple.e2);
     }
 
     /**
      * Override hashCode() for Tuple
+     *
      * @return hash code for Tuple
      */
     @Override

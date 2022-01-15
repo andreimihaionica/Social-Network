@@ -9,6 +9,7 @@ public class Friendship extends Entity<Tuple<Long, Long>> {
 
     /**
      * Constructor with parameters
+     *
      * @param date - String
      */
     public Friendship(String date, FriendshipStatus status) {
@@ -18,6 +19,7 @@ public class Friendship extends Entity<Tuple<Long, Long>> {
 
     /**
      * Get date for Friendship
+     *
      * @return date - String
      */
     public String getDate() {
@@ -28,12 +30,9 @@ public class Friendship extends Entity<Tuple<Long, Long>> {
         return status;
     }
 
-    public void setStatus(FriendshipStatus status) {
-        this.status = status;
-    }
-
     /**
      * Override toString() for Friendship
+     *
      * @return String
      */
     @Override

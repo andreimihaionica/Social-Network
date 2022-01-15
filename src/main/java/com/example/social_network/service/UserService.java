@@ -17,6 +17,7 @@ public class UserService {
 
     /**
      * Constructor with parameter
+     *
      * @param repo - repository
      */
     public UserService(PagingRepository<Long, User> repo) {
@@ -25,6 +26,7 @@ public class UserService {
 
     /**
      * Get repository
+     *
      * @return repository
      */
     public Repository<Long, User> getRepo() {
@@ -33,18 +35,21 @@ public class UserService {
 
     /**
      * Add user in repository
+     *
      * @param user - User to be added
      */
     public void addUser(User user) {
         id++;
-        while(getUser(id) != null){
+        while (getUser(id) != null) {
             id++;
         }
         user.setId(id);
         repo.save(user);
     }
+
     /**
      * Delete user from repository
+     *
      * @param username - username of User
      */
     public void deleteUser(String username) {
@@ -53,15 +58,17 @@ public class UserService {
 
     /**
      * Update user with id = id
-     * @param id -
+     *
+     * @param id   -
      * @param user -
      */
-    public void updateUser(Long id, User user){
+    public void updateUser(Long id, User user) {
         repo.update(id, user);
     }
 
     /**
      * Add friend in friend list
+     *
      * @param username1 - username of User1
      * @param username2 - username of User2
      */
@@ -78,6 +85,7 @@ public class UserService {
 
     /**
      * Get ID of User
+     *
      * @param username - username of User
      * @return - Long
      */
@@ -91,6 +99,7 @@ public class UserService {
 
     /**
      * Get User by ID
+     *
      * @param id - id of User
      * @return - User
      */
@@ -100,6 +109,7 @@ public class UserService {
 
     /**
      * Get User by username
+     *
      * @param username - username of User
      * @return - User
      */
@@ -113,6 +123,7 @@ public class UserService {
 
     /**
      * Get all users
+     *
      * @return List of users
      */
     public Iterable<User> getAll() {

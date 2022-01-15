@@ -8,16 +8,18 @@ import java.util.Queue;
 public class Graph {
     /**
      * Pair of two entities
+     *
      * @param <T>
      * @param <V>
      */
-    static class Pair<T,V> {
+    static class Pair<T, V> {
         T first;
         V second;
 
         /**
          * Constructor with parameters
-         * @param first - entity
+         *
+         * @param first  - entity
          * @param second - entity
          */
         Pair(T first, V second) {
@@ -31,6 +33,7 @@ public class Graph {
 
     /**
      * Constructor with parameters
+     *
      * @param V - no. of nodes
      */
     public Graph(int V) {
@@ -43,7 +46,8 @@ public class Graph {
 
     /**
      * Add edge in graph
-     * @param src - node1
+     *
+     * @param src  - node1
      * @param dest - node2
      */
     public void addEdge(int src, int dest) {
@@ -53,9 +57,10 @@ public class Graph {
 
     /**
      * Depth First Search
-     * @param v - node
+     *
+     * @param v       - node
      * @param visited - isVisited
-     * @param graph - subGraph
+     * @param graph   - subGraph
      */
     void DFSUtil(int v, boolean[] visited, ArrayList<Integer> graph) {
         visited[v] = true;
@@ -69,6 +74,7 @@ public class Graph {
 
     /**
      * Determinate no. of connected components
+     *
      * @return no. of connected components
      */
     public int ConnectedComponents() {
@@ -89,8 +95,9 @@ public class Graph {
 
     /**
      * Breadth First Search
+     *
      * @param u - start node
-     * @return  farthest node and its distance from node u
+     * @return farthest node and its distance from node u
      */
     public Pair<Integer, Integer> bfs(int u) {
         int[] dis = new int[V];
@@ -102,10 +109,10 @@ public class Graph {
         while (!q.isEmpty()) {
             int t = q.poll();
 
-            for(int i = 0; i < adjListArray.get(t).size(); ++i) {
+            for (int i = 0; i < adjListArray.get(t).size(); ++i) {
                 int v = adjListArray.get(t).get(i);
 
-                if(dis[v] == -1) {
+                if (dis[v] == -1) {
                     q.add(v);
                     dis[v] = dis[t] + 1;
                 }
@@ -115,8 +122,8 @@ public class Graph {
         int maxDis = 0;
         int nodeIdx = 0;
 
-        for(int i = 0; i < V; ++i) {
-            if(dis[i] > maxDis) {
+        for (int i = 0; i < V; ++i) {
+            if (dis[i] > maxDis) {
                 maxDis = dis[i];
                 nodeIdx = i;
             }
@@ -127,6 +134,7 @@ public class Graph {
 
     /**
      * Determinate longest path
+     *
      * @param u - start node
      * @return - start node and last node
      */
@@ -140,6 +148,7 @@ public class Graph {
 
     /**
      * Determinate longest path for graph
+     *
      * @return start node, last node, length
      */
     public ArrayList<Integer> longestPath() {
@@ -155,7 +164,7 @@ public class Graph {
                 DFSUtil(v, visited, graph);
 
                 Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> pair = longestPathLength(graph.get(0));
-                if(maxLength < pair.second.second){
+                if (maxLength < pair.second.second) {
                     maxLength = pair.second.second;
                     maxPath = new Pair<>(pair.first.first, pair.second.first);
                 }

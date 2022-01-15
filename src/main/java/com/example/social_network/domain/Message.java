@@ -9,7 +9,7 @@ public class Message extends Entity<Long> {
     private List<User> to;
     private LocalDateTime date;
     private String message;
-    private Long reply;
+    private final Long reply;
 
     public Message(User from, List<User> to, LocalDateTime date, String message, Long reply) {
         this.from = from;
@@ -55,13 +55,9 @@ public class Message extends Entity<Long> {
         return reply;
     }
 
-    public void setReply(Long reply) {
-        this.reply = reply;
-    }
-
     @Override
     public String toString() {
-        return  '\'' + message + '\'' +
+        return '\'' + message + '\'' +
                 " at " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss"));
     }
 }

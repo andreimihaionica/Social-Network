@@ -16,18 +16,18 @@ import static java.lang.String.valueOf;
  * Service class
  */
 public class Service {
-    private final UserService userService;
-    private final FriendshipService friendshipService;
-    private final MessageService messageService;
-    private final PasswordService passwordService;
-    private final EventService eventService;
+    UserService userService;
+    FriendshipService friendshipService;
+    MessageService messageService;
+    PasswordService passwordService;
+    EventService eventService;
 
     /**
      * Constructor with parameters
      *
      * @param userService       - UserService
      * @param friendshipService - FriendshipService
-     * @param eventService
+     * @param eventService      - EventService
      */
     public Service(UserService userService, FriendshipService friendshipService, MessageService messageService, PasswordService passwordService, EventService eventService) {
         this.userService = userService;
@@ -108,10 +108,6 @@ public class Service {
      */
     public Iterable<User> getAllUsers() {
         return userService.getAll();
-    }
-
-    public Set<User> getUsersOnPage(int page) {
-        return userService.getUsersOnPage(page);
     }
 
     /**
@@ -195,10 +191,6 @@ public class Service {
      */
     public Iterable<Friendship> getAllFriendships() {
         return friendshipService.getAll();
-    }
-
-    public Set<Friendship> getFriendshipsOnPage(int page) {
-        return friendshipService.getFriendshipsOnPage(page);
     }
 
     public FriendshipStatus verifyFriendship(String username1, String username2) {
@@ -378,13 +370,13 @@ public class Service {
      * @param reply   - id of reply
      */
     public Message sendMessage(String from, String to, String message, Long reply) {
-        User userFrom = null;
+        User userFrom;
         if (userService.getUser(from) == null)
             throw new IllegalArgumentException("User " + from + " does not exist!");
         else
             userFrom = userService.getUser(from);
 
-        StringBuilder errors = new StringBuilder("");
+        StringBuilder errors = new StringBuilder();
         List<String> usernames = List.of(to.split(";"));
         List<User> userTo = new ArrayList<>();
         for (String username : usernames) {
@@ -451,36 +443,6 @@ public class Service {
         return messageService.getAll();
     }
 
-    public Set<Message> getMessagesOnPage(int page) {
-        return messageService.getMessagesOnPage(page);
-    }
-
-    public int getMutualFriends(String username1, String username2) {
-        int mutualFriends = 0;
-
-        for (Friendship friendship : getAllFriendships()) {
-
-            if (Objects.equals(friendship.getId().getLeft(), getUser(username1).getId())) {
-
-                if (getFriendship(getUser(friendship.getId().getRight()).getUsername(), username2) != null) {
-                    mutualFriends++;
-                }
-
-            }
-
-            if (Objects.equals(friendship.getId().getRight(), getUser(username1).getId())) {
-
-                if (getFriendship(getUser(friendship.getId().getLeft()).getUsername(), username2) != null) {
-                    mutualFriends++;
-                }
-
-            }
-
-        }
-
-        return mutualFriends;
-    }
-
     public void addPassword(Long userId, String passwordString) {
         Password password = new Password(userId, passwordString);
         passwordService.addPassword(password);
@@ -506,14 +468,9 @@ public class Service {
         eventService.updateEvent(eventName, subscribers);
     }
 
-    public Event createEvent(String username, String name, String description, String location, String type, LocalDateTime date) {
+    public void createEvent(String username, String name, String description, String location, String type, LocalDateTime date) {
         User createdBy = userService.getUser(username);
-        return eventService.createEvent(createdBy, name, description, location, type, date, new ArrayList<>());
-    }
-
-    public void deleteEvent(String name) {
-        Event event = eventService.getEvent(name);
-        eventService.deleteEvent(event.getId());
+        eventService.createEvent(createdBy, name, description, location, type, date, new ArrayList<>());
     }
 
     public Set<Event> getEventsOnPage(int page) {
@@ -538,11 +495,11 @@ public class Service {
         LocalDateTime now = LocalDateTime.now();
         Iterable<Message> messages = getAllMessages();
         for (Event event : events) {
-            Long days = ChronoUnit.DAYS.between(now, event.getDate()) + 1;
+            long days = ChronoUnit.DAYS.between(now, event.getDate()) + 1;
             if (event.getSubscribers().contains(user) && (days == 7 || days == 2 || days == 1)) {
                 boolean received = false;
                 for (Message message : messages) {
-                    Long hours = ChronoUnit.HOURS.between(now, message.getDate());
+                    long hours = ChronoUnit.HOURS.between(now, message.getDate());
                     if (Objects.equals(message.getFrom().getId(), getUser("Notification").getId()) && message.getTo().contains(getUser(currentUser)) && hours < 24 && message.getMessage().contains(event.getName())) {
                         received = true;
                     }

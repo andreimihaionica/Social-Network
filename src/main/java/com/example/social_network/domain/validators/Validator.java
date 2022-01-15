@@ -2,11 +2,13 @@ package com.example.social_network.domain.validators;
 
 /**
  * Represent the validator interface for object T
+ *
  * @param <T> -
  */
 public interface Validator<T> {
     /**
      * Validate entity
+     *
      * @param entity - Entity
      * @throws ValidationException -
      */

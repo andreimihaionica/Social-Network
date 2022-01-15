@@ -1,8 +1,9 @@
 package com.example.social_network.repository.paging;
+
 public class PageableImplementation implements Pageable {
 
-    private int pageNumber;
-    private int pageSize;
+    private final int pageNumber;
+    private final int pageSize;
 
     public PageableImplementation(int pageNumber, int pageSize) {
         this.pageNumber = pageNumber;
