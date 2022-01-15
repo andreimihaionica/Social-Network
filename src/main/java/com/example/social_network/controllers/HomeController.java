@@ -50,6 +50,7 @@ public class HomeController {
     public void initialize() throws IOException {
         lblCurrentUser.setText(SignInController.currentUser);
         changePaneToOverview();
+        SignInController.service.sendNotification(SignInController.currentUser);
     }
 
     public void changePaneToOverview() throws IOException {
