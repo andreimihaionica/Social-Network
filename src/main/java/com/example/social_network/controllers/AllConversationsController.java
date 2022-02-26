@@ -93,6 +93,7 @@ public class AllConversationsController {
         Service service = SignInController.service;
         Iterable<Message> messageIterable = service.getAllMessages();
         List<Message> messages = new ArrayList<>();
+
         for (Message message : messageIterable) {
             messages.add(message);
         }
