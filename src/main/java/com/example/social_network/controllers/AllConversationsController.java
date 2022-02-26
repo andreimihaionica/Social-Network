@@ -163,6 +163,8 @@ public class AllConversationsController {
     public void changePnlSendNewMessage() {
         tfTo.setText("");
         taMessage.setText("");
+        warningMessage.setText("");
+        btnSendMessage.setDisable(false);
 
         pnlAllConversations.setVisible(false);
         pnlSendNewMessage.setVisible(true);

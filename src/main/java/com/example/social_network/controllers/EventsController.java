@@ -63,6 +63,8 @@ public class EventsController {
         tfType.setText("");
         lblDescription.setText("");
         warningMessage.setText("");
+        btnCreateEvent.setDisable(false);
+        date.setValue(LocalDate.now());
 
         pnlEvents.setVisible(false);
         pnlCreateNewEvent.setVisible(true);

@@ -98,7 +98,7 @@ public class OverviewController {
 
         for (User user : service.getAllUsers()) {
             try {
-                if (user.getUsername().startsWith(searchUser.getText()) && !Objects.equals(user.getUsername(), SignInController.currentUser) && service.verifyFriendship(SignInController.currentUser, user.getUsername()) != FriendshipStatus.REJECTED) {
+                if (user.getUsername().startsWith(searchUser.getText()) && !Objects.equals(user.getUsername(), SignInController.currentUser) && service.verifyFriendship(SignInController.currentUser, user.getUsername()) != FriendshipStatus.REJECTED && !Objects.equals(user.getUsername(), "Notification")) {
                     suggestedUserItems.getChildren().add(getNode(user.getUsername(), true));
                     noSuggestions--;
                     if (noSuggestions == 0)
