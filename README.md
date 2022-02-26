@@ -7,4 +7,4 @@
 
 
 # Dependencies
-You'll need PostgresSQL and PDFBox to be able to compile the program.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You'll need PostgresSQL and PDFBox to be able to compile the program.
