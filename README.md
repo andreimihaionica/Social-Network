@@ -10,7 +10,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You'll need PostgresSQL and PDFBox to be able to compile the program.
 
 # Screenshots
-LogIn 
 <img width="962" alt="SignIn" src="https://user-images.githubusercontent.com/81651340/156927733-2351e33d-e747-4707-a912-1d6a2a6de2d9.png">
 
 Overview
