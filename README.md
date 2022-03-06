@@ -10,17 +10,17 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You'll need PostgresSQL and PDFBox to be able to compile the program.
 
 # Screenshots
-<img width="962" alt="SignIn" src="https://user-images.githubusercontent.com/81651340/156927733-2351e33d-e747-4707-a912-1d6a2a6de2d9.png">
 LogIn 
+<img width="962" alt="SignIn" src="https://user-images.githubusercontent.com/81651340/156927733-2351e33d-e747-4707-a912-1d6a2a6de2d9.png">
 
-<img width="1096" alt="Overview" src="https://user-images.githubusercontent.com/81651340/156927781-baaa8fb1-08d2-460d-bd8e-9d94f0db3ab6.png">
 Overview
+<img width="1096" alt="Overview" src="https://user-images.githubusercontent.com/81651340/156927781-baaa8fb1-08d2-460d-bd8e-9d94f0db3ab6.png">
 
-<img width="1096" alt="Conversations" src="https://user-images.githubusercontent.com/81651340/156927790-a664cc56-3d27-4418-b6e4-a856e036319a.png">
 Conversations
+<img width="1096" alt="Conversations" src="https://user-images.githubusercontent.com/81651340/156927790-a664cc56-3d27-4418-b6e4-a856e036319a.png">
 
-<img width="1096" alt="Events" src="https://user-images.githubusercontent.com/81651340/156927796-c95956cc-34cd-49f2-a19a-0a597fca25b9.png">
 Events
+<img width="1096" alt="Events" src="https://user-images.githubusercontent.com/81651340/156927796-c95956cc-34cd-49f2-a19a-0a597fca25b9.png">
 
-<img width="1096" alt="Statistics" src="https://user-images.githubusercontent.com/81651340/156927819-5af47401-68cf-4b3c-ab77-0550c820d0ec.png">
 Statistics
+<img width="1096" alt="Statistics" src="https://user-images.githubusercontent.com/81651340/156927819-5af47401-68cf-4b3c-ab77-0550c820d0ec.png">
